@@ -1,0 +1,15 @@
+---
+title: 'Replication Project Proposal'
+author: "Katherine Flaschen"
+date: "January 13, 2015"
+output: html_document
+---
+
+Writeup
+------
+
+**a.** For my replication project, I chose a paper by Kupor, Laurin, and Levav (2015) - Study 3, specifically.  This experiment is related to my research interests for several reasons.  First, while I am not particularly interested in religion, I am very interested in what causes people to engage in risky decision making.  In fact, I am currently working on a project that explores whether exposure to humorous (vs. non-humorous) stimuli causes people to make riskier choices.  Further, the design, statistical analyses (i.e. mediation), and operationalization of risk employed in this study are directly relevant to my project.  Finally, as a Behavioral Marketing student in the GSB, I work with Jonathan Levav; thus, I am particularly interested in his research.
+
+**b.** For the procedure, I will need to recruit 101 participants on MTurk.  Participants will then complete a priming task in which they will read either a short paragraph about God (experimental condition) or about Pluto (control condition).  Then, in an ostensibly unrelated survey, participants will read three scenarios that each describe a risky situation (motorcycling without a helmet, wilderness camping, and backcountry skiing).  Next, for each scenario, participants will complete three items assessing their perceptions of danger, thus creating a nine-item index of perceived risk (the proposed mediator).  Finally, participants will report how willing they would be to take each risk, forming a three-item index of risk taking.  
+
+One challenge associated with this project will be making sure that I contact the researchers to learn about the specific procedural details that were unclear or not included in the methods section.  For example, from just reading the methods section, I am unsure as to whether the risk perception questions followed each scenario or whether they were answered after participants read all three scenarios.  Another challenge will be coding the experiment in javascript, as I have no previous programming experience.
