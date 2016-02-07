@@ -11,52 +11,102 @@ body {
 	line-height: 20px;
 }
 
-.hidden {
-    display: none;
+.slide {
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 550px;
 }
 
 .stanford-picture {
     display: block;
-    margin: 10px auto;
+    margin: 20px auto;
+}
+
+.block-text {
+  width: 550px;
+  text-align: justify;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+
+#legal {
+  margin: 0 auto;
+  margin-top: 1.5em;
+  font-size: 0.8em;
 }
 
 .button {
-    display: block;
-    margin: 0 auto;
+	background: url(images/button-gradient.png);
+	border: 1px solid #999;
+	border-top: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+	display: block;
+	margin: 0 auto;
+	margin-top: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-bottom: 20px;
+	height: 29px;
+	min-width: 70px;
+	font-family: Georgia, serif;
+	font-size: 14px;
 }
 
-.slide {
-    margin: 0 auto;
-    padding: 40px 0;
-    width: 530px;
-}
-
-.question-header {
+.header {
     font-weight: bold;
-    padding: 20px 0;
+    padding: 5px 0;
+		margin-bottom: .5em;
+		width: 550px;
+	  text-align: justify;
+		margin-top: 15px;
 }
 
 .title {
     text-align: center;
     text-decoration: underline;
-    padding: 50px 0;
+    padding: 10px 0;
+		margin-top: 20px;
 }
 
-.labels .very-much {
+.labels .bottom-scale {
+		font-size: 14px;
+}
+
+.labels .top-scale {
     float: right;
+		font-size: 14px;
 }
 
 .option {
-    width: 72px;
+    width: 75px;
 }
 
 .option input {
     margin: 0 auto;
-    display: block
+    display: block;
 }
 
 .number-label {
-    text-align: center;
+		text-align: center;
+		font-size: 14px;
+		margin-bottom: 3px;
+}
+
+.question-header {
+    font-weight: bold;
+    padding: 5px 0;
+		margin-bottom: .5em;
+		width: 550px;
+	  text-align: justify;
+		margin-top: 30px;
+}
+
+.description {
+    padding: 5px 0;
+		margin-bottom: .5em;
+		width: 550px;
+	  text-align: justify;
+		margin-top: 15px;
 }
 
 .survey-question {

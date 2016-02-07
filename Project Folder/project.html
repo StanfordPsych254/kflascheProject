@@ -26,7 +26,7 @@
 
     <p class="block-text"><br> <b> Note: you won't be able to preview this HIT before accepting it because it's so short. </b></p>
 
-    <p class="block-text" id="legal">By answering the following questions, you are participating in a study being performed by the Stanford Department of Psychology. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you. Note however that we have recently been made aware that your public Amazon.com profile can be accessed via your worker ID if you do not choose to opt out. If you would like to opt out of this feature, you may follow instructions available <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=16465241">here</a>.</p>
+    <p class="block-text" id="legal">By answering the following questions, you are participating in a study being performed by the Stanford Department of Psychology. You must be  at least 18 years old to participate. Your participation in this research is voluntary. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you. Note however that we have recently been made aware that your public Amazon.com profile can be accessed via your worker ID if you do not choose to opt out. If you would like to opt out of this feature, you may follow instructions available <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=16465241">here</a>.</p>
   </div>
 
 
@@ -34,108 +34,154 @@
 
   <!-- God Slide 1 -->
   <div class="slide hidden" id="condition-0">
-    <div class="question-header">Please read the below information carefully. You will be asked questions about it on the next page.</div>
+    <div class="header">Please read the below information carefully. You will be asked questions about it on the next page.</div>
 
     <div class="title">God</div>
 
-    <div>
+    <div class="block-text">
       God is often thought of as a supreme being. Theologians have described God as having many attributes, including omniscience (infinite knowledge), omnipotence (unlimited power), omnipresence (present everywhere), and omnibenevolence (perfect goodness). God has also been conceived as being incorporeal (immaterial), a personal being, and the "greatest conceivable existent."
     </div>
 
-    <button type="button" class="button" id="god-next">Next</button>
+    <button type="button" class="button" id="page1-god-next">Next</button>
   </div>
 
-  <div class="slide hidden" id="god-page-2">
+  <!-- God Slide 2 -->
+  <div class="slide hidden" id="page2-god">
 
-    <div class="question-header">Did you think that the information ww</div>
+    <div class="header">Did you think that the information that you read was interesting?</div>
 
     <div class="labels">
-      <span class="very-much">Very Much</span>
-      <span class="not-at-all">Not at all</span>
+      <span class="bottom-scale">Not At All</span>
+      <span class="top-scale">Very Much</span>
     </div>
 
     <div class="options">
       <ul>
         <li class="option">
           <div class="number-label">1</div>
-          <input type="radio" name="god-1" id="god-1" />
+          <input type="radio" name="god-1" id="god-1" value="1"/>
         </li>
         <li class="option">
           <div class="number-label">2</div>
-          <input type="radio" name="god-2" id="god-2" />
+          <input type="radio" name="god-2" id="god-2" value="2"/>
         </li>
         <li class="option">
           <div class="number-label">3</div>
-          <input type="radio" name="god-3" id="god-3" />
+          <input type="radio" name="god-3" id="god-3" value="3"/>
         </li>
         <li class="option">
           <div class="number-label">4</div>
-          <input type="radio" name="god-4" id="god-4" />
+          <input type="radio" name="god-4" id="god-4" value="4"/>
         </li>
         <li class="option">
           <div class="number-label">5</div>
-          <input type="radio" name="god-5" id="god-5" />
+          <input type="radio" name="god-5" id="god-5" value="5"/>
         </li>
         <li class="option">
           <div class="number-label">6</div>
-          <input type="radio" name="god-6" id="god-6" />
+          <input type="radio" name="god-6" id="god-6" value="6"/>
         </li>
         <li class="option">
           <div class="number-label">7</div>
-          <input type="radio" name="god-7" id="god-7" />
+          <input type="radio" name="god-7" id="god-7" value="7"/>
         </li>
       </ul>
     </div>
 
-    <div class="question-header">What are you thoughts about?</div>
-    <textarea id="thoughts"></textarea>
+    <div class="question-header">What are your thoughts about the information that you read?</div>
+    <textarea id="god-thoughts"></textarea>
 
-    <div class="question-header">According to...</div>
-    <textarea id="thoughts"></textarea>
+    <div class="question-header">According to the passage that you read, what is an attribute that God has? You can use your own words, or the words in the passage.</div>
+    <textarea id="god-attncheck"></textarea>
 
-    <!-- TODO name me -->
-    <button type="button" class="button">Next</button>
+    <button type="button" class="button" id="page2-god-next">Next</button>
 
   </div>
 
+  <!-- Manipulation: Control -->
 
-
-  <!-- Slide: Manipulation: God -->
+  <!-- Control Slide 1 -->
   <div class="slide hidden" id="condition-1">
-    <br>
+    <div class="header">Please read the below information carefully. You will be asked questions about it on the next page.</div>
 
-    <div align="left">
-      <p><strong>Please read the below information carefully. You will be asked questions about it on the next page.</strong></p><br>
+    <div class="title">Pluto</div>
+
+    <div class="block-text">
+      In 2006, the International Astronomers’ Union passed a resolution outlining three conditions for an object to be called a planet. First, the object must orbit the sun; second, the object must be a sphere; and third, it must have cleared the neighborhood around its orbit.  Pluto does not meet the third condition, and is thus not a planet.
     </div>
-    <br>
-    <div align="center">
-      <p><u>sup bro</u></p>
-    </div>
-    <div align="left">
-      <p>God is often thought of as a supreme being. Theologians have described God as having many attributes, including omniscience (infinite knowledge), omnipotence (unlimited power), omnipresence (present everywhere), and omnibenevolence (perfect goodness). God has also been conceived as being incorporeal (immaterial), a personal being, and the "greatest conceivable existent."</p>
-    </div>
-    <br>
+
+    <button type="button" class="button" id="page1-control-next">Next</button>
   </div>
 
+  <!-- Control Slide 2 -->
+  <div class="slide hidden" id="page2-control">
 
-  <!-- TRANSITION SLIDE -->
-  <div class="slide hidden" id="transition">
-    You will now complete quetsion for a serpare seruvey. Please click the arrows to continue.
-
-    <!-- TODO name me -->
-    <button type="button" class="button">Next</button>
-  </div>
-
-
-  <!-- COMMON QUESTION SLIDE -->
-  <div class="slide" id="page-4">
-    <div class="description">hello</div>
-
-    <div class="question-header">Did you think that the information ww</div>
+    <div class="header">Did you think that the information that you read was interesting?</div>
 
     <div class="labels">
-      <span>Not at all</span>
-      <span>Very Much</span>
+      <span class="bottom-scale">Not At All</span>
+      <span class="top-scale">Very Much</span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="control-1" id="control-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="control-2" id="control-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="control-3" id="control-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="control-4" id="control-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="control-5" id="control-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="control-6" id="control-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="control-7" id="control-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-header">What are your thoughts about the information that you read?</div>
+    <textarea id="control-thoughts"></textarea>
+
+    <div class="question-header">According to the passage that you read, is Pluto a planet?</div>
+    <textarea id="control-attncheck"></textarea>
+
+    <button type="button" class="button" id="page2-control-next">Next</button>
+
+  </div>
+
+  <!-- Transition Slide -->
+  <div class="slide hidden" id="transition">
+    <div class="header">You will now complete questions for a separate survey. Please click the next button to continue.</div>
+    <button type="button" class="button" id="transition-next">Next</button>
+  </div>
+
+
+  <!-- DV 1: Motorcycle -->
+  <div class="slide hidden" id="motorcycle">
+    <div class="description">Imagine that you have a motorcycle that you love to ride. It is a nice day outside, and you are planning to ride your motorcycle to a nearby park to have a picnic.  Since it's such a beautiful day out, you are thinking about riding your motorcycle without a helmet so that you can feel the wind in your face and have a better ride to the park. However, if you decide to take the risk and not wear a helmet, there is a greater chance of being injured if you get into an accident.</div>
+
+    <div class="header">If you rode your motorcyle without a helmet, what do you think the likelihood is that you would be injured?</div>
+
+    <div class="labels">
+      <span class="bottom-scale">Extremely<br>Unlikely</span>
+      <span class="top-scale">Extremely<br>Likely</span>
     </div>
 
     <div class="options">
@@ -171,12 +217,10 @@
       </ul>
     </div>
 
-
-    <!-- TODO name me -->
     <button type="button" class="button">Next</button>
   </div>
 
-  <div class="slide" id="believe-god">
+  <div class="slide hidden" id="believe-god">
     <div class="question-header">Do you believe in God?</div>
 
     <div>
@@ -187,7 +231,7 @@
     </div>
   </div>
 
-  <div class="slide" id="final-questions">
+  <div class="slide hidden" id="final-questions">
     <div class="question-header">What is your gender?</div>
     <input type="radio" id="gender-male" />Male
     <input type="radio" id="gender-female" />Female
