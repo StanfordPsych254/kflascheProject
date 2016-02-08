@@ -38,4 +38,32 @@ $(function() {
     $('#motorcycle').removeClass('hidden');
   });
 
+  $('#motorcycle-next').click(function(event) {
+    window.scrollTo(0,0);
+    $('#motorcycle').addClass('hidden');
+    $('#wildernesscamping').removeClass('hidden');
+  });
+
+  $('#wildernesscamping-next').click(function(event) {
+    window.scrollTo(0,0);
+    $('#wildernesscamping').addClass('hidden');
+    $('#skiing').removeClass('hidden');
+  });
+
+  $('#skiing-next').click(function(event) {
+    window.scrollTo(0,0);
+    $('#skiing').addClass('hidden');
+    $('#believe-god').removeClass('hidden');
+  });
+
+  $('#believe-god-next').click(function(event) {
+    $('#believe-god').addClass('hidden');
+    $('#final-questions').removeClass('hidden');
+  });
+
+  $('#submit').click(function(event) {
+    $('#final-questions').addClass('hidden');
+    $('#thankyou').removeClass('hidden');
+  });
+
 })

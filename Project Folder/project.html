@@ -59,31 +59,31 @@
       <ul>
         <li class="option">
           <div class="number-label">1</div>
-          <input type="radio" name="god-1" id="god-1" value="1"/>
+          <input type="radio" name="god" id="god-1" value="1"/>
         </li>
         <li class="option">
           <div class="number-label">2</div>
-          <input type="radio" name="god-2" id="god-2" value="2"/>
+          <input type="radio" name="god" id="god-2" value="2"/>
         </li>
         <li class="option">
           <div class="number-label">3</div>
-          <input type="radio" name="god-3" id="god-3" value="3"/>
+          <input type="radio" name="god" id="god-3" value="3"/>
         </li>
         <li class="option">
           <div class="number-label">4</div>
-          <input type="radio" name="god-4" id="god-4" value="4"/>
+          <input type="radio" name="god" id="god-4" value="4"/>
         </li>
         <li class="option">
           <div class="number-label">5</div>
-          <input type="radio" name="god-5" id="god-5" value="5"/>
+          <input type="radio" name="god" id="god-5" value="5"/>
         </li>
         <li class="option">
           <div class="number-label">6</div>
-          <input type="radio" name="god-6" id="god-6" value="6"/>
+          <input type="radio" name="god" id="god-6" value="6"/>
         </li>
         <li class="option">
           <div class="number-label">7</div>
-          <input type="radio" name="god-7" id="god-7" value="7"/>
+          <input type="radio" name="god" id="god-7" value="7"/>
         </li>
       </ul>
     </div>
@@ -127,31 +127,31 @@
       <ul>
         <li class="option">
           <div class="number-label">1</div>
-          <input type="radio" name="control-1" id="control-1" value="1"/>
+          <input type="radio" name="control" id="control-1" value="1"/>
         </li>
         <li class="option">
           <div class="number-label">2</div>
-          <input type="radio" name="control-2" id="control-2" value="2"/>
+          <input type="radio" name="control" id="control-2" value="2"/>
         </li>
         <li class="option">
           <div class="number-label">3</div>
-          <input type="radio" name="control-3" id="control-3" value="3"/>
+          <input type="radio" name="control" id="control-3" value="3"/>
         </li>
         <li class="option">
           <div class="number-label">4</div>
-          <input type="radio" name="control-4" id="control-4" value="4"/>
+          <input type="radio" name="control" id="control-4" value="4"/>
         </li>
         <li class="option">
           <div class="number-label">5</div>
-          <input type="radio" name="control-5" id="control-5" value="5"/>
+          <input type="radio" name="control" id="control-5" value="5"/>
         </li>
         <li class="option">
           <div class="number-label">6</div>
-          <input type="radio" name="control-6" id="control-6" value="6"/>
+          <input type="radio" name="control" id="control-6" value="6"/>
         </li>
         <li class="option">
           <div class="number-label">7</div>
-          <input type="radio" name="control-7" id="control-7" value="7"/>
+          <input type="radio" name="control" id="control-7" value="7"/>
         </li>
       </ul>
     </div>
@@ -168,10 +168,9 @@
 
   <!-- Transition Slide -->
   <div class="slide hidden" id="transition">
-    <div class="header">You will now complete questions for a separate survey. Please click the next button to continue.</div>
+    <div class="thankyou">You will now complete questions for a separate survey. Please click the next button to continue.</div>
     <button type="button" class="button" id="transition-next">Next</button>
   </div>
-
 
   <!-- DV 1: Motorcycle -->
   <div class="slide hidden" id="motorcycle">
@@ -180,72 +179,560 @@
     <div class="header">If you rode your motorcyle without a helmet, what do you think the likelihood is that you would be injured?</div>
 
     <div class="labels">
-      <span class="bottom-scale">Extremely<br>Unlikely</span>
-      <span class="top-scale">Extremely<br>Likely</span>
+      <span class="top-scale"><div class="special">Extremely<br>Likely</div></span>
+      <span class="bottom-scale"><div class="special">Extremely<br>Unlikely</div></span>
     </div>
 
     <div class="options">
       <ul>
         <li class="option">
           <div class="number-label">1</div>
-          <input type="radio" name="god-1" id="god-1" />
+          <input type="radio" name="m-likelihood" id="m-likelihood-1" value="1"/>
         </li>
         <li class="option">
           <div class="number-label">2</div>
-          <input type="radio" name="god-2" id="god-2" />
+          <input type="radio" name="m-likelihood" id="m-likelihood-2" value="2"/>
         </li>
         <li class="option">
           <div class="number-label">3</div>
-          <input type="radio" name="god-3" id="god-3" />
+          <input type="radio" name="m-likelihood" id="m-likelihood-3" value="3"/>
         </li>
         <li class="option">
           <div class="number-label">4</div>
-          <input type="radio" name="god-4" id="god-4" />
+          <input type="radio" name="m-likelihood" id="m-likelihood-4" value="4"/>
         </li>
         <li class="option">
           <div class="number-label">5</div>
-          <input type="radio" name="god-5" id="god-5" />
+          <input type="radio" name="m-likelihood" id="m-likelihood-5" value="5"/>
         </li>
         <li class="option">
           <div class="number-label">6</div>
-          <input type="radio" name="god-6" id="god-6" />
+          <input type="radio" name="m-likelihood" id="m-likelihood-6" value="6"/>
         </li>
         <li class="option">
           <div class="number-label">7</div>
-          <input type="radio" name="god-7" id="god-7" />
+          <input type="radio" name="m-likelihood" id="m-likelihood-7" value="7"/>
         </li>
       </ul>
     </div>
 
-    <button type="button" class="button">Next</button>
+    <div class="question-header">If you were injured while riding your motorcyle, how serious do you think the injury would be?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Serious</div></span>
+      <span class="bottom-scale"><div class="special">Not Serious<br>At All</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="m-serious" id="m-serious-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="m-serious" id="m-serious-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="m-serious" id="m-serious-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="m-serious" id="m-serious-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="m-serious" id="m-serious-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="m-serious" id="m-serious-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="m-serious" id="m-serious-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-header">If you were injured while riding your motorcyle, how well would you be able to cope with the injury?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Well</div></span>
+      <span class="bottom-scale"><div class="special">Not Well<br>At All</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="m-cope" id="m-cope-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="m-cope" id="m-cope-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="m-cope" id="m-cope-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="m-cope" id="m-cope-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="m-cope" id="m-cope-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="m-cope" id="m-cope-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="m-cope" id="m-cope-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-header">How likely would you be to ride your motorcycle without a helmet?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Likely</div></span>
+      <span class="bottom-scale"><div class="special">Not Likely<br>At All</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="m-likely" id="m-likely-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="m-likely" id="m-likely-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="m-likely" id="m-likely-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="m-likely" id="m-likely-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="m-likely" id="m-likely-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="m-likely" id="m-likely-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="m-likely" id="m-likely-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <button type="button" class="button" id="motorcycle-next">Next</button>
+
   </div>
 
+  <!-- DV 2: Wilderness Camping -->
+  <div class="slide hidden" id="wildernesscamping">
+    <div class="description">Imagine that you are planning a trip to Guatemala, and you are looking online to see what kinds of activities you could do during your trip. You enjoy wilderness camping, and you see a website that describes a Guatemalan wilderness area that people can camp in. The wilderness area looks magnificent. You know that you would have an amazing time camping in this wilderness area. However, the website notes that if you decide to take the risk and go camping in this area, there are dangers that you could face (such as potentially dangerous wild animals and weather).</div>
+
+    <div class="header">If you did go wilderness camping, what do you think the likelihood is that you will get injured?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Likely</div></span>
+      <span class="bottom-scale"><div class="special">Extremely<br>Unlikely</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="wc-likelihood" id="wc-likelihood-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="wc-likelihood" id="wc-likelihood-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="wc-likelihood" id="wc-likelihood-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="wc-likelihood" id="wc-likelihood-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="wc-likelihood" id="wc-likelihood-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="wc-likelihood" id="wc-likelihood-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="wc-likelihood" id="wc-likelihood-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-header">If you did get injured while wilderness camping, how serious do you think the injury would be?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Serious</div></span>
+      <span class="bottom-scale"><div class="special">Not Serious<br>At All</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="wc-serious" id="wc-serious-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="wc-serious" id="wc-serious-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="wc-serious" id="wc-serious-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="wc-serious" id="wc-serious-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="wc-serious" id="wc-serious-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="wc-serious" id="wc-serious-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="wc-serious" id="wc-serious-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-header">If you did get injured while wilderness camping, how well would you be able to cope with the injury?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Well</div></span>
+      <span class="bottom-scale"><div class="special">Not Well<br>At All</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="wc-cope" id="wc-cope-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="wc-cope" id="wc-cope-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="wc-cope" id="wc-cope-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="wc-cope" id="wc-cope-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="wc-cope" id="wc-cope-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="wc-cope" id="wc-cope-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="wc-cope" id="wc-cope-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-header">How likely would you be to go wilderness camping?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Likely</div></span>
+      <span class="bottom-scale"><div class="special">Not Likely<br>At All</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="wc-likely" id="wc-likely-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="wc-likely" id="wc-likely-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="wc-likely" id="wc-likely-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="wc-likely" id="wc-likely-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="wc-likely" id="wc-likely-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="wc-likely" id="wc-likely-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="wc-likely" id="wc-likely-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <button type="button" class="button" id="wildernesscamping-next">Next</button>
+
+  </div>
+
+  <!-- DV 3: Wilderness Camping -->
+  <div class="slide hidden" id="skiing">
+    <div class="description">Imagine that you like to ski, and you are are deciding whether or not to spend the day backcountry skiing. Backcountry skiing is skiing on an unmarked slope that is not maintained, monitored, or patrolled by anyone. You are thinking that backcountry skiing would be a great experience. However, if you decide to take the risk and go backcountry skiing, there is a chance that you could get injured by an avalanche, rock fall, or weather.</div>
+
+    <div class="header">If you go backcountry skiing, what is the likelihood that you would get injured?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Likely</div></span>
+      <span class="bottom-scale"><div class="special">Extremely<br>Unlikely</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="s-likelihood" id="s-likelihood-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="s-likelihood" id="s-likelihood-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="s-likelihood" id="s-likelihood-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="s-likelihood" id="s-likelihood-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="s-likelihood" id="s-likelihood-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="s-likelihood" id="s-likelihood-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="s-likelihood" id="s-likelihood-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-header">If you go backcountry skiing and get injured, how serious do you think the injury would be?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Serious</div></span>
+      <span class="bottom-scale"><div class="special">Not Serious<br>At All</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="s-serious" id="s-serious-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="s-serious" id="s-serious-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="s-serious" id="s-serious-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="s-serious" id="s-serious-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="s-serious" id="s-serious-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="s-serious" id="s-serious-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="s-serious" id="s-serious-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-header">If you go backcountry skiing and get injured, how well would you be be able to cope with the injury?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Well</div></span>
+      <span class="bottom-scale"><div class="special">Not Well<br>At All</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="s-cope" id="s-cope-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="s-cope" id="s-cope-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="s-cope" id="s-cope-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="s-cope" id="s-cope-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="s-cope" id="s-cope-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="s-cope" id="s-cope-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="s-cope" id="s-cope-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <div class="question-header">How likely would you be to go backcountry skiing?</div>
+
+    <div class="labels">
+      <span class="top-scale"><div class="special">Extremely<br>Likely</div></span>
+      <span class="bottom-scale"><div class="special">Not Likely<br>At All</div></span>
+    </div>
+
+    <div class="options">
+      <ul>
+        <li class="option">
+          <div class="number-label">1</div>
+          <input type="radio" name="s-likely" id="s-likely-1" value="1"/>
+        </li>
+        <li class="option">
+          <div class="number-label">2</div>
+          <input type="radio" name="s-likely" id="s-likely-2" value="2"/>
+        </li>
+        <li class="option">
+          <div class="number-label">3</div>
+          <input type="radio" name="s-likely" id="s-likely-3" value="3"/>
+        </li>
+        <li class="option">
+          <div class="number-label">4</div>
+          <input type="radio" name="s-likely" id="s-likely-4" value="4"/>
+        </li>
+        <li class="option">
+          <div class="number-label">5</div>
+          <input type="radio" name="s-likely" id="s-likely-5" value="5"/>
+        </li>
+        <li class="option">
+          <div class="number-label">6</div>
+          <input type="radio" name="s-likely" id="s-likely-6" value="6"/>
+        </li>
+        <li class="option">
+          <div class="number-label">7</div>
+          <input type="radio" name="s-likely" id="s-likely-7" value="7"/>
+        </li>
+      </ul>
+    </div>
+
+    <button type="button" class="button" id="skiing-next">Next</button>
+
+  </div>
+
+  <!-- Belief in God Slide -->
   <div class="slide hidden" id="believe-god">
-    <div class="question-header">Do you believe in God?</div>
+    <div class="header">Do you believe in God?</div>
 
     <div>
-      <input type="radio" class="survey-question" id="god-yes" />Yes
+      <input type="radio" name="god-believe" id="god-yes" value="Yes"/>
+      <label for="god-yes" class="survey-question">Yes</label>
     </div>
     <div>
-      <input type="radio" class="survey-question" id="god-no" />No
+      <input type="radio" name="god-believe" id="god-no" value="No"/>
+      <label for="god-no" class="survey-question">No</label>
     </div>
+
+    <button type="button" class="button" id="believe-god-next">Next</button>
+
   </div>
 
+  <!-- Final Questions Slide -->
   <div class="slide hidden" id="final-questions">
-    <div class="question-header">What is your gender?</div>
-    <input type="radio" id="gender-male" />Male
-    <input type="radio" id="gender-female" />Female
-    <input type="radio" id="gender-other" />Other
+    <div class="header">What is your gender?</div>
+    <div>
+      <input type="radio" name="gender" id="gender-male" value="Male"/>
+      <label for="gender-male" class="survey-question">Male</label>
+    </div>
+    <div>
+      <input type="radio" name="gender" id="gender-female" value="Female"/>
+      <label for="gender-female" class="survey-question">Female</label>
+    </div>
+    <div>
+      <input type="radio" name="gender" id="gender-other" value="Other"/>
+      <label for="gender-other" class="survey-question">Other</label>
+    </div>
 
-    <div class="question-header">How old are you?</div>
+    <div class="header">How old are you?<br>
+      (Please enter only a number, without any label).</div>
     <input type="text" id="age-box" />
 
-    <div class="question-header">Is english your first language?</div>
-    <input type="radio" id="english-yes" />Yes
-    <input type="radio" id="english-no" />No
+    <div class="question-header">Is English your first language?</div>
+    <div>
+      <input type="radio" name="english" id="english-yes" value="Yes"/>
+      <label for="english-yes" class="survey-question">Yes</label>
+    </div>
+    <div>
+      <input type="radio" name="english" id="english-no" value="No"/>
+      <label for="english-no" class="survey-question">No</label>
+    </div>
+
+    <button type="button" class="button" id="submit">Submit</button>
+
+  </div>
+
+  <!-- Thank You Slide -->
+  <div class="slide hidden" id="thankyou">
+    <div class="thankyou">We thank you for your time taking these surveys. Your responses have been recorded.</div>
   </div>
 
 </body>
 </html>
 
-<!-- End of Slide -->
+<!-- End of Survey -->

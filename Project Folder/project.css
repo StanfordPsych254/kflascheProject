@@ -1,7 +1,4 @@
-/* ## General styles */
-/* This stuff can be ported from experiment to experiment.*/
-
-/* We want the page to sit flush inside the browser window - that means no margins or padding. Also, use a nice-looking serif font. */
+/* ## Stylesheet */
 
 body {
 	padding: 0;
@@ -77,6 +74,11 @@ body {
 		font-size: 14px;
 }
 
+.special {
+	width: 80px;
+	text-align: center;
+}
+
 .option {
     width: 75px;
 }
@@ -110,7 +112,19 @@ body {
 }
 
 .survey-question {
-    margin-right: 15px;
+		font-size: 14px;
+		margin-left: 4px;
+		font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
+		font-weight: normal;
+}
+
+.thankyou {
+	font-weight: normal;
+	padding: 5px 0;
+	margin-bottom: .5em;
+	width: 550px;
+	text-align: center;
+	margin-top: 15px;
 }
 
 ul {
