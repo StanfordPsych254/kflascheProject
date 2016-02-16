@@ -1,0 +1,64 @@
+---
+title: "Replication of Study 3 in “Anticipating divine protection? Reminders of god can increase nonmoral risk taking” by Kupor, D. M., Laurin, K., & Levav, J."
+author: "(Psychological Science 26.4 (2015): 374-384)"
+date: "Katherine Flaschen (kflasche@stanford.edu)"
+output: html_document
+---
+
+## Introduction
+In this study, Kupor, Laurin, and Levav (2015) demonstrated that priming God increased people’s willingness to take nonmoral risks.  Further, they showed that this effect was mediated by perceived risk.  Specifically, reminders of God (as opposed to a control condition) led individuals to perceive nonmoral risk as less dangerous, which in turn led to an increased willingness to take such risk.  The authors suggested that reminders of God led to less perceived risk because such reminders evoked a feeling of safety from potential harm, although this was tested more directly in a subsequent study.
+
+## Methods
+### Power Analysis
+Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
+
+### Planned Sample
+Planned sample size and/or termination rule, sampling frame (from above)
+
+Like the original authors, I will have no specific criteria for participant demographics.  The original study cited a mean age of 31.4 years, 64.4% male and 35.6% female.  
+
+The authors did not allow participants who had taken one of their previous experiments on God and risk taking to participate in their study.  I will not need to adhere to this preselection rule, as I have not run any experiments on this topic.  Further, I will try to match the MTurk qualifications I use to those employed by the authors.
+
+### Materials
+The original study’s exact materials will be used in my study:
+
+<b>Priming Conditions:</b> <br>
+<u>God Prime Condition: </u> <br>
+God is often thought of as a supreme being. Theologians have described God as having many attributes, including omniscience (infinite knowledge), omnipotence (unlimited power),¬ omnipresence (present everywhere), and omnibenevolence (perfect goodness). God has also been conceived as being incorporeal (immaterial), a personal being, and the "greatest conceivable existent." (adapted from Wikipedia: http://en.wikipedia.org/wiki/God) 
+
+<u>Control Condition: </u> <br> 
+In 2006, the International Astronomers’ Union passed a resolution outlining three conditions for an object to be called a planet. First, the object must orbit the sun; second, the object must be a sphere; and third, it must have cleared the neighborhood around its orbit. Pluto does not meet the third condition, and is thus not a planet. (adapted from Wikipedia: http://en.wikipedia.org/wiki/Pluto)
+
+<b>Nonmoral Risk Scenarios:</b> <br>
+<u>Motorcycle Scenario: </u> <br>
+Imagine that you have a motorcycle that you love to ride. It is a nice day outside, and you are planning to ride your motorcycle to a nearby park to have a picnic. Since it's such a beautiful day out, you are thinking about riding your motorcycle without a helmet so that you can feel the wind in your face and have a better ride to the park. However, if you decide to take the risk and not wear a helmet, there is a greater chance of being injured if you get into an accident.
+
+<u>Wilderness Camping Scenario: </u> <br>
+Imagine that you are planning a trip to Guatemala, and you are looking online to see what kinds of activities you could do during your trip. You enjoy wilderness camping, and you see a website that describes a Guatemalan wilderness area that people can camp in. The wilderness area looks magnificent. You know that you would have an amazing time camping in this wilderness area. However, the website notes that if you decide to take the risk and go camping in this area, there are dangers that you could face (such as potentially dangerous wild animals and weather).
+
+<u>Backcountry Skiing Scenario: </u> <br>
+Imagine that you like to ski, and you are deciding whether or not to spend the day backcountry skiing. Backcountry skiing is skiing on an unmarked slope that is not maintained, monitored, or patrolled by anyone. You are thinking that backcountry skiing would be a great experience. However, if you decide to take the risk and go backcountry skiing, there is a chance that you could get injured by an avalanche, rock fall, or weather.
+
+### Procedure
+I will follow the original study’s procedure exactly, with a possible exception of sample size, depending on my power analysis. Further, I will only post one HIT on MTurk, with x number of assignments:
+
+“One hundred one participants (mean age = 31.4 years; 64.4% male, 35.6% female) completed this study. We obtained these participants by posting 100 HITs on MTurk. We randomly assigned participants to either the God condition or the control condition from Study 1d. In an ostensibly unrelated survey, participants read three scenarios that each described a risky decision (motorcycling without a helmet, wilderness camping, and backcountry skiing). After reading each scenario, participants completed three items assessing their perceptions of danger: “If you did [e.g., go wilderness camping], what is the likelihood that you will get injured?” (1 = extremely unlikely, 7 = extremely likely), “If you did get injured while [e.g., wilderness camping], how serious do you think the injury would be?” (1 = not serious at all, 7 = extremely serious), and “If you did get injured while [e.g., wilderness camping], how well would you be able to cope with the injury?” (1 = not well at all, 7 = extremely well; reverse coded). We created an index of the nine subjective-danger-perception items (with higher scores representing more perceived danger; α  = .71). Finally, participants reported how willing they would be to take each risk (1 = not likely at all, 7 = extremely likely), which yielded an index of risk taking (α  = .60).”
+
+### Analysis Plan
+The original authors did not exclude any participants from the data analysis.  I will run the following analyses both on all participants and only on participants who spend at least 2 seconds reading the priming (God vs. control) excerpt.  Although the original authors did not do this, I think this is consistent with research best practices, as I would not expect the priming condition to have an effect on any participant who did not read the excerpt.
+
+First, like the original authors, I will run a linear mixed model that includes scenario (three levels, dummy coded) and condition.  If scenario does not moderate the effect of condition, I will collapse my analysis across the three risky scenarios, as the original authors did.
+
+Also, like the original authors, I will run a mediation analysis: “Our primary analysis tested the indirect effect (Hayes, 2013) using willingness to take risks as the dependent variable, priming condition (God = 1, control = 0) as the independent variable, and perceived risk as the mediating variable.”  I will also re-run these analyses, treating each item in the perceived-danger composite individually, to make sure this has no effect on the results (as the original authors did).
+
+Finally, I will make sure that belief in God (“yes” or “no”) does not moderate these results.  The authors also performed this additional analysis.
+
+### Differences from Original Study
+Given that the original study was run on MTurk and that I have all the exact materials from the original study, I anticipate few differences from the original study.  As previously mentioned, the only differences I anticipate are: 
+
+a) Potentially different planned sample size, depending on power analysis (see “Planned Sample”). This could have an impact on the study’s findings if the original study was underpowered.
+b) Slightly different preselection rules from original authors (see “Planned Sample”). I do not anticipate that this difference will have an effect on the study’s findings.
+c) I will be posting one HIT with x assignments on MTurk, rather than 100 HITs, as the original authors did (see “Procedure”). I do not anticipate that this difference will have an effect on the study’s findings.
+d) Although the original authors did not do this, I will run my analyses both on all participants and only on participants who spend at least 2 seconds reading the priming excerpt (see “Analysis Plan”).  If many participants do not spend time reading the priming information, then I would anticipate that these analyses could lead to different results (i.e. the analyses on all participants may not show the hypothesized effect).
+
+
