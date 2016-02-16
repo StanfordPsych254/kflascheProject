@@ -1,7 +1,6 @@
 ---
-title: "Replication of Study 3 in “Anticipating divine protection? Reminders of god can increase nonmoral risk taking” by Kupor, D. M., Laurin, K., & Levav, J."
-author: "(Psychological Science 26.4 (2015): 374-384)"
-date: "Katherine Flaschen (kflasche@stanford.edu)"
+title: "Replication of Study 3 in “Anticipating divine protection? Reminders of god can increase nonmoral risk taking” by Kupor, D. M., Laurin, K., & Levav, J. (Psychological Science 26.4 (2015): 374-384)"
+author: "Katherine Flaschen (kflasche@stanford.edu)"
 output: html_document
 ---
 
