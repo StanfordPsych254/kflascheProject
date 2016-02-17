@@ -24,7 +24,6 @@ $(function() {
   $('#page2-god-next').click(function(event) {
     var completed = true;
 
-//Add to each slide where I want it
     if (
       !$("input:radio[name='god']:checked").val() ||
       !$('#god-thoughts').val() ||
@@ -34,14 +33,12 @@ $(function() {
       completed = false;
       window.scrollTo(0,0);
     }
-    //End
 
-    if (completed) { //add this
+    if (completed) {
       $('#page2-god').addClass('hidden');
       $('#transition').removeClass('hidden');
-      $('.error').addClass('hidden'); //add this
+      $('.error').addClass('hidden');
     }
-
   });
   // End of condition 0 (God)
 
@@ -53,8 +50,23 @@ $(function() {
   });
 
   $('#page2-control-next').click(function(event) {
+    var completed = true;
+
+    if (
+      !$("input:radio[name='control']:checked").val() ||
+      !$('#control-thoughts').val() ||
+      !$('#control-attncheck').val()
+    ) {
+      $('.error').removeClass('hidden');
+      completed = false;
+      window.scrollTo(0,0);
+    }
+
+    if (completed) {
     $('#page2-control').addClass('hidden');
     $('#transition').removeClass('hidden');
+    $('.error').addClass('hidden');
+  }
   });
   // End of condition 1 (Control)
 
@@ -66,29 +78,90 @@ $(function() {
 
   //Scenario 1: Motorcycle
   $('#motorcycle-next').click(function(event) {
+    var completed = true;
+
+    if (
+      !$("input:radio[name='m-likelihood']:checked").val() ||
+      !$("input:radio[name='m-serious']:checked").val() ||
+      !$("input:radio[name='m-cope']:checked").val() ||
+      !$("input:radio[name='m-likely']:checked").val()
+    ) {
+      $('.error').removeClass('hidden');
+      completed = false;
+      window.scrollTo(0,0);
+    }
+
+    if (completed) {
     window.scrollTo(0,0);
     $('#motorcycle').addClass('hidden');
     $('#wildernesscamping').removeClass('hidden');
+    $('.error').addClass('hidden');
+  }
   });
 
   //Scenario 2: Wilderness Camping
   $('#wildernesscamping-next').click(function(event) {
+    var completed = true;
+
+    if (
+      !$("input:radio[name='wc-likelihood']:checked").val() ||
+      !$("input:radio[name='wc-serious']:checked").val() ||
+      !$("input:radio[name='wc-cope']:checked").val() ||
+      !$("input:radio[name='wc-likely']:checked").val()
+    ) {
+      $('.error').removeClass('hidden');
+      completed = false;
+      window.scrollTo(0,0);
+    }
+
+    if (completed) {
     window.scrollTo(0,0);
     $('#wildernesscamping').addClass('hidden');
     $('#skiing').removeClass('hidden');
+    $('.error').addClass('hidden');
+  }
   });
 
   //Scenario 3: Skiing
   $('#skiing-next').click(function(event) {
+    var completed = true;
+
+    if (
+      !$("input:radio[name='s-likelihood']:checked").val() ||
+      !$("input:radio[name='s-serious']:checked").val() ||
+      !$("input:radio[name='s-cope']:checked").val() ||
+      !$("input:radio[name='s-likely']:checked").val()
+    ) {
+      $('.error').removeClass('hidden');
+      completed = false;
+      window.scrollTo(0,0);
+    }
+
+    if (completed) {
     window.scrollTo(0,0);
     $('#skiing').addClass('hidden');
     $('#believe-god').removeClass('hidden');
+    $('.error').addClass('hidden');
+  }
   });
 
   //Do you believe in God?
   $('#believe-god-next').click(function(event) {
+    var completed = true;
+
+    if (
+      !$("input:radio[name='god-believe']:checked").val() 
+    ) {
+      $('.error').removeClass('hidden');
+      completed = false;
+      window.scrollTo(0,0);
+    }
+
+    if (completed) {
     $('#believe-god').addClass('hidden');
     $('#final-questions').removeClass('hidden');
+    $('.error').addClass('hidden');
+  }
   });
 
   //Demographics
