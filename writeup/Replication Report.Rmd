@@ -9,7 +9,24 @@ In this study, Kupor, Laurin, and Levav (2015) demonstrated that priming God inc
 
 ## Methods
 ### Power Analysis
-Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
+The original study reports that:
+a) Participants in the God condition reported a higher willingness to take risks, *b* = .61, *t*(99) = 2.29, *p* = .024, than did participants in the control condition.
+b) Participants in the God condition also perceived less danger associated with these risks, *b* = -0.44, *t*(99) = -2.97, *p* = .004, than did participants in the control condition.
+c) When the effects of God condition and perceived danger were both included in the model, the indirect effect (i.e., through the mediator) was significant (95% confidence interval, or CI = [0.12, 0.64]), whereas the direct effect (i.e., the effect of condition independent of the mediator) was not significant, *b* = 0.28, *t*(98) = 1.12, *p* = .267.
+
+Because I didn't have enough information to calculate the effect size of the indirect effect, I calculated the effect size for the IV's effect on the DV, as well as the effect size for the IV's effect on the mediator:
+a) *b* = .61, *t*(99) = 2.29, *p* = .02 (Cohen's d = .46)
+b) *b* = -0.44, *t*(99) = -2.97, *p* = .004 (Cohen's d = .60)
+
+Then, I took the smaller of these two effect sizes, Cohen's d = .46, for my power analysis:
+```{r Power Analysis}
+power.t.test(delta=0.46, sd=1, power=.95, sig.level=0.05)
+power.t.test(delta=0.46, sd=1, power=.90, sig.level=0.05)
+power.t.test(delta=0.46, sd=1, power=.80, sig.level=0.05)
+```
+
+
+
 
 ### Planned Sample
 Planned sample size and/or termination rule, sampling frame (from above)
