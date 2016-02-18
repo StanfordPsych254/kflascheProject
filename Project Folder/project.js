@@ -183,7 +183,7 @@ $(function() {
 
     if (completed) {
       experiment.log_response();
-      experiment.submit_others();
+      experiment.submit_others(time);
       experiment.end();
       $('#final-questions').addClass('hidden');
       $('#thankyou').removeClass('hidden');
@@ -363,12 +363,12 @@ var experiment = {
           }
         }
       },
-    submit_others: function() {
+    submit_others: function(time) {
       experiment.data.god_thoughts.push(document.getElementById("god-thoughts").value);
       experiment.data.god_attncheck.push(document.getElementById("god-attncheck").value);
       experiment.data.control_thoughts.push(document.getElementById("control-thoughts").value);
       experiment.data.control_attncheck.push(document.getElementById("control-attncheck").value);
-      experiment.data.primetime.push("time".value);
+      experiment.data.primetime.push(time);
       experiment.data.age.push(document.getElementById("age-box").value);
   }
 }
