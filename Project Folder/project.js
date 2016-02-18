@@ -6,6 +6,7 @@ $(function() {
 
   var CONDITION = Math.floor(Math.random() * 2);
   var a;
+  var time;
 
   //Instructions Slide
   $('.start-button').click(function(event) {
@@ -202,6 +203,7 @@ var experiment = {
       condition_control: [],
       control_thoughts: [],
       control_attncheck: [],
+      primetime: [],
       mlikelihood: [],
       mserious: [],
       mcope: [],
@@ -366,6 +368,7 @@ var experiment = {
       experiment.data.god_attncheck.push(document.getElementById("god-attncheck").value);
       experiment.data.control_thoughts.push(document.getElementById("control-thoughts").value);
       experiment.data.control_attncheck.push(document.getElementById("control-attncheck").value);
+      experiment.data.primetime.push("time".value);
       experiment.data.age.push(document.getElementById("age-box").value);
   }
 }
