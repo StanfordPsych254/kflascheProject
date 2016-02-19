@@ -2,6 +2,10 @@
 
 // Set condition
 $(function() {
+  if (window.self == window.top | turk.workerId.length > 0) {
+    $('.start-button').removeClass('hidden');
+  };
+
   $('#age-box').filter_input({regex:'[0-9]'});
 
   var CONDITION = Math.floor(Math.random() * 2);
@@ -173,7 +177,9 @@ $(function() {
     if (!$("input:radio[name='gender']:checked").val() ||
         !$("input:radio[name='english']:checked").val() ||
         !$("input:radio[name='check']:checked").val() ||
-        !$('#age-box').val()) {
+        !$("input:checkbox[name='race']:checked").val() ||
+        !$('#age-box').val() ||
+        !$('#study-check').val()) {
       answered = false;
     }
 
@@ -219,8 +225,10 @@ var experiment = {
       godbelief: [],
       gen: [],
       age: [],
+      race_ethn: [],
       engl: [],
       previouscheck: [],
+      studycheck: [],
     },
 
     end: function() {
@@ -364,11 +372,20 @@ var experiment = {
         }
       },
     submit_others: function(time) {
+      var races = document.getElementsByName("race");
+
+	    // Loop through race buttons
+	    for (i = 0; i < races.length; i++) {
+	       if (races[i].checked) {
+		         experiment.data.race_ethn.push(races[i].value);
+	        }
+	       }
       experiment.data.god_thoughts.push(document.getElementById("god-thoughts").value);
       experiment.data.god_attncheck.push(document.getElementById("god-attncheck").value);
       experiment.data.control_thoughts.push(document.getElementById("control-thoughts").value);
       experiment.data.control_attncheck.push(document.getElementById("control-attncheck").value);
       experiment.data.primetime.push(time);
       experiment.data.age.push(document.getElementById("age-box").value);
+      experiment.data.studycheck.push(document.getElementById("study-check").value);
   }
 }

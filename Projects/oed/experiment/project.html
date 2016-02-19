@@ -29,7 +29,7 @@
 
     <p class="block-text"><strong>It is important that you are able to complete this session in a single sitting without distraction.</strong>  If this is a good time to complete this session, please click on the start button below.</p>
 
-    <button type="button" class="button start-button">Start</button>
+    <button type="button" class="button hidden start-button">Start</button>
 
     <p class="block-text"><br> <b> Note: you won't be able to preview this HIT before accepting it because it's so short. </b></p>
 
@@ -720,7 +720,39 @@
       (Please enter only a number, without any label).</div>
     <input type="text" id="age-box" />
 
-    <div class="question-header">Is English your first language?</div>
+    <div class="question-header">What is your race/ethnicity?<br>
+    (Please check all that apply).</div>
+    <div>
+      <input type="checkbox" name="race" id="race1" value="amInd"/>
+      <label for="race1" class="survey-question">American Indian or Alaskan Native</label>
+    </div>
+    <div>
+      <input type="checkbox" name="race" id="race2" value="asian"/>
+      <label for="race2" class="survey-question">Asian</label>
+    </div>
+    <div>
+      <input type="checkbox" name="race" id="race3" value="black"/>
+      <label for="race3" class="survey-question">Black/African American</label>
+    </div>
+    <div>
+      <input type="checkbox" name="race" id="race4" value="hispanic"/>
+      <label for="race4" class="survey-question">Hispanic/Latino(a)</label>
+    </div>
+    <div>
+      <input type="checkbox" name="race" id="race5" value="natHaw"/>
+      <label for="race5" class="survey-question">Native Hawaiian or US
+      Pacific Islander</label>
+    </div>
+    <div>
+      <input type="checkbox" name="race" id="race6" value="white"/>
+      <label for="race6" class="survey-question">White/Caucasian</label>
+    </div>
+    <div>
+      <input type="checkbox" name="race" id="race7" value="other"/>
+      <label for="race7" class="survey-question">Other</label>
+    </div>
+
+    <div class="header">Is English your first language?</div>
     <div>
       <input type="radio" name="english" id="english-yes" value="Yes"/>
       <label for="english-yes" class="survey-question">Yes</label>
@@ -739,6 +771,9 @@
       <input type="radio" name="check" id="check-no" value="No"/>
       <label for="check-no" class="survey-question">No</label>
     </div>
+
+    <div class="header">In your opinion, what were these two surveys about?</div>
+    <textarea id="study-check"></textarea>
 
     <button type="button" class="button" id="submit">Submit</button>
 
