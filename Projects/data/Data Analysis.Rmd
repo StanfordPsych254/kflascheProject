@@ -1,0 +1,129 @@
+---
+title: 'Replication: Data Analysis'
+author: "Katherine Flaschen"
+date: "February 20, 2016"
+output: 
+  html_document:
+    toc: true
+---
+
+```{r Load Packages}
+rm(list=ls())
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(langcog) 
+library(rjson)
+```
+
+# Data prep
+
+```{r Data prep}
+path <- "~/kflascheProject/Projects/mturk/"
+files <- dir(paste0(path,"sandbox-results/"), 
+             pattern = "*.json")
+d.raw <- data.frame()
+
+for (f in files) {
+  jf <- paste0(path, "sandbox-results/",f)
+  jd <- fromJSON(paste(readLines(jf), collapse=""))
+  id <- data.frame(workerid = jd$WorkerId,
+                   timer = jd$answer$primetime,
+                   god_condition = jd$answer$condition_god,
+                   god_thoughts = jd$answer$god_thoughts,
+                   god_attncheck = jd$answer$god_attncheck,
+                   control_condition = jd$answer$condition_control,
+                   control_thoughts = jd$answer$condition_control,
+                   control_attncheck = jd$answer$condition_control)
+  d.raw <- bind_rows(d.raw, id)
+}
+
+# Number of participants
+length(unique(d.raw$workerid))
+```
+
+Data cleanup
+
+```{r}
+d <- filter(d.raw, scale != "training1") %>%
+  mutate(stars = as.numeric(as.character(stars))/20) %>%
+  select(-language)
+
+head(d)
+```
+
+# More sanity checks
+
+Start with a histogram, *ALWAYS*. 
+```{r}
+qplot(judgment, data = d, binwidth=1) + 
+  xlim(c(1,6))
+
+```
+
+Break down by IVs.
+
+```{r}
+qplot(judgment, data = d, binwidth=1) + 
+  xlim(c(1,6)) + 
+  facet_grid(.~stars)
+
+qplot(judgment, data = d, binwidth=1) + 
+  xlim(c(1,6)) + 
+  facet_grid(.~scale)
+
+qplot(judgment, data = d, binwidth=1) + 
+  xlim(c(1,6)) + 
+  facet_grid(scale~stars)
+```
+
+# Try using just ggplot to do our whole data analysis
+
+```{r}
+ggplot(d, aes(x = stars, y = judgment, col = degree)) + 
+  geom_jitter() + 
+  geom_smooth(method="lm", formula =  y ~ x + I(x^2)) +
+  facet_wrap(~scale)
+```
+
+# Main Analysis (take 1)
+
+Aggregation step. 
+
+```{r}
+ms <- d %>%
+  group_by(scale, degree, stars) %>%
+  summarise(mean = mean(judgment), 
+            sem = sd(judgment) / sqrt(n()), 
+            ci95 = 1.96*sem)
+```
+
+plotting
+
+```{r}
+ggplot(ms, aes(x = stars, y = mean, col = degree)) + 
+  geom_line() + 
+  geom_pointrange(aes(ymin = mean - ci95, 
+                      ymax = mean + ci95)) + 
+  facet_wrap(~scale)
+```
+
+
+# Main Analysis (take 2)
+
+```{r}
+ms <- d %>%
+  group_by(scale, degree, stars) %>%
+  multi_boot_standard(column = "judgment")
+```
+
+Plotting step. 
+
+```{r}
+ggplot(ms, aes(x = stars, y = mean, col = degree)) + 
+  geom_line() + 
+  geom_pointrange(aes(ymin = ci_lower, 
+                      ymax = ci_upper)) + 
+  facet_wrap(~ scale)
+```
+
