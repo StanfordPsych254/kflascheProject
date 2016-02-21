@@ -1,0 +1,90 @@
+{
+    "AutoApprovalTime": "2016-02-19T03:49:38Z",
+    "AssignmentId": "36PW28KO40V7A8EC83CDI6YAR2OEAP",
+    "WorkerId": "A2MLX6Z5UTPWLW",
+    "answers": {
+        "data": {
+            "mlikelihood": [
+                "4"
+            ],
+            "wcserious": [
+                "4"
+            ],
+            "engl": [
+                "Yes"
+            ],
+            "wclikely": [
+                "4"
+            ],
+            "condition_god": [
+                "3"
+            ],
+            "mlikely": [
+                "4"
+            ],
+            "s_cope": [
+                "4"
+            ],
+            "studycheck": [
+                "WILDERNESS CAMPING ISNT RISKY"
+            ],
+            "primetime": [
+                1.809
+            ],
+            "godbelief": [
+                "No"
+            ],
+            "control_thoughts": [
+                ""
+            ],
+            "wccope": [
+                "4"
+            ],
+            "mserious": [
+                "4"
+            ],
+            "wclikelihood": [
+                "4"
+            ],
+            "previouscheck": [
+                "No"
+            ],
+            "mcope": [
+                "4"
+            ],
+            "sserious": [
+                "4"
+            ],
+            "slikelihood": [
+                "4"
+            ],
+            "control_attncheck": [
+                ""
+            ],
+            "gen": [
+                "Other"
+            ],
+            "condition_control": [],
+            "race_ethn": [
+                "hispanic"
+            ],
+            "age": [
+                "23"
+            ],
+            "god_thoughts": [
+                "Katherine's super smart and wrote it, so its amazing"
+            ],
+            "god_attncheck": [
+                "He's cool, like KFlash"
+            ],
+            "slikely": [
+                "4"
+            ]
+        }
+    },
+    "AcceptTime": "2016-02-19T03:43:31Z",
+    "HITId": "36D1BWBEHN0EU9DRMJ2F1CO4HO5M20",
+    "Assignment": "",
+    "AssignmentStatus": "Submitted",
+    "SubmitTime": "2016-02-19T03:44:38Z"
+}

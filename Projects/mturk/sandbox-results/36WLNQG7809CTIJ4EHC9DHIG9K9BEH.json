@@ -1,0 +1,91 @@
+{
+    "ApprovalTime": "2016-02-19T02:05:23Z",
+    "AutoApprovalTime": "2016-02-19T02:04:12Z",
+    "AssignmentId": "36WLNQG7809CTIJ4EHC9DHIG9K9BEH",
+    "WorkerId": "A2AU5NRYXKY2JV",
+    "answers": {
+        "data": {
+            "mlikelihood": [
+                "6"
+            ],
+            "wcserious": [
+                "5"
+            ],
+            "engl": [
+                "No"
+            ],
+            "wclikely": [
+                "7"
+            ],
+            "condition_god": [
+                "6"
+            ],
+            "mlikely": [
+                "5"
+            ],
+            "s_cope": [
+                "4"
+            ],
+            "studycheck": [
+                "melanie is great"
+            ],
+            "primetime": [
+                2.152
+            ],
+            "godbelief": [
+                "No"
+            ],
+            "control_thoughts": [
+                ""
+            ],
+            "wccope": [
+                "6"
+            ],
+            "mserious": [
+                "5"
+            ],
+            "wclikelihood": [
+                "6"
+            ],
+            "previouscheck": [
+                "No"
+            ],
+            "mcope": [
+                "4"
+            ],
+            "sserious": [
+                "3"
+            ],
+            "slikelihood": [
+                "6"
+            ],
+            "control_attncheck": [
+                ""
+            ],
+            "gen": [
+                "Female"
+            ],
+            "condition_control": [],
+            "race_ethn": [
+                "amInd"
+            ],
+            "age": [
+                "24"
+            ],
+            "god_thoughts": [
+                "melanie is great"
+            ],
+            "god_attncheck": [
+                "melanie is awesome"
+            ],
+            "slikely": [
+                "4"
+            ]
+        }
+    },
+    "AcceptTime": "2016-02-19T01:57:30Z",
+    "HITId": "36D1BWBEHN0EU9DRMJ2F1CO4HO5M20",
+    "Assignment": "",
+    "AssignmentStatus": "Approved",
+    "SubmitTime": "2016-02-19T01:59:12Z"
+}

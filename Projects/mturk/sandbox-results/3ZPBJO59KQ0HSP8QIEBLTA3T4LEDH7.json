@@ -1,0 +1,91 @@
+{
+    "ApprovalTime": "2016-02-19T06:45:23Z",
+    "AutoApprovalTime": "2016-02-19T06:42:58Z",
+    "AssignmentId": "3ZPBJO59KQ0HSP8QIEBLTA3T4LEDH7",
+    "WorkerId": "AO9ZEY01FY0A3",
+    "answers": {
+        "data": {
+            "mlikelihood": [
+                "1"
+            ],
+            "wcserious": [
+                "4"
+            ],
+            "engl": [
+                "Yes"
+            ],
+            "wclikely": [
+                "5"
+            ],
+            "condition_god": [],
+            "mlikely": [
+                "1"
+            ],
+            "s_cope": [
+                "4"
+            ],
+            "studycheck": [
+                "Lee Ross"
+            ],
+            "primetime": [
+                11.36
+            ],
+            "godbelief": [
+                "No"
+            ],
+            "control_thoughts": [
+                "Come back Pluto. -this is Josh"
+            ],
+            "wccope": [
+                "1"
+            ],
+            "mserious": [
+                "7"
+            ],
+            "wclikelihood": [
+                "1"
+            ],
+            "previouscheck": [
+                "No"
+            ],
+            "mcope": [
+                "1"
+            ],
+            "sserious": [
+                "4"
+            ],
+            "slikelihood": [
+                "7"
+            ],
+            "control_attncheck": [
+                "Not anymore sucks -this is Josh. Hello!"
+            ],
+            "gen": [
+                "Male"
+            ],
+            "condition_control": [
+                "2"
+            ],
+            "race_ethn": [
+                "white"
+            ],
+            "age": [
+                "28"
+            ],
+            "god_thoughts": [
+                ""
+            ],
+            "god_attncheck": [
+                ""
+            ],
+            "slikely": [
+                "1"
+            ]
+        }
+    },
+    "AcceptTime": "2016-02-19T06:35:10Z",
+    "HITId": "36D1BWBEHN0EU9DRMJ2F1CO4HO5M20",
+    "Assignment": "",
+    "AssignmentStatus": "Approved",
+    "SubmitTime": "2016-02-19T06:37:58Z"
+}

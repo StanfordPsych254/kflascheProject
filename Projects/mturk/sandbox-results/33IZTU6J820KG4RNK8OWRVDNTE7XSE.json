@@ -1,0 +1,91 @@
+{
+    "ApprovalTime": "2016-02-19T10:00:23Z",
+    "AutoApprovalTime": "2016-02-19T09:58:09Z",
+    "AssignmentId": "33IZTU6J820KG4RNK8OWRVDNTE7XSE",
+    "WorkerId": "A1SWF00MVF2CQZ",
+    "answers": {
+        "data": {
+            "mlikelihood": [
+                "2"
+            ],
+            "wcserious": [
+                "2"
+            ],
+            "engl": [
+                "Yes"
+            ],
+            "wclikely": [
+                "7"
+            ],
+            "condition_god": [
+                "7"
+            ],
+            "mlikely": [
+                "4"
+            ],
+            "s_cope": [
+                "4"
+            ],
+            "studycheck": [
+                "I am a perfectly naive participant and have absolutely no clue. What day is it again?"
+            ],
+            "primetime": [
+                20.484
+            ],
+            "godbelief": [
+                "No"
+            ],
+            "control_thoughts": [
+                ""
+            ],
+            "wccope": [
+                "3"
+            ],
+            "mserious": [
+                "6"
+            ],
+            "wclikelihood": [
+                "1"
+            ],
+            "previouscheck": [
+                "Yes"
+            ],
+            "mcope": [
+                "5"
+            ],
+            "sserious": [
+                "3"
+            ],
+            "slikelihood": [
+                "3"
+            ],
+            "control_attncheck": [
+                ""
+            ],
+            "gen": [
+                "Male"
+            ],
+            "condition_control": [],
+            "race_ethn": [
+                "white"
+            ],
+            "age": [
+                "22"
+            ],
+            "god_thoughts": [
+                "Kristin Laurin's work on the psychological effects of religious belief is pretty awesome. :)"
+            ],
+            "god_attncheck": [
+                "Omnipotence"
+            ],
+            "slikely": [
+                "6"
+            ]
+        }
+    },
+    "AcceptTime": "2016-02-19T09:49:22Z",
+    "HITId": "36D1BWBEHN0EU9DRMJ2F1CO4HO5M20",
+    "Assignment": "",
+    "AssignmentStatus": "Approved",
+    "SubmitTime": "2016-02-19T09:53:09Z"
+}

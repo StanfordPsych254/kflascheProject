@@ -1,0 +1,91 @@
+{
+    "ApprovalTime": "2016-02-19T23:35:23Z",
+    "AutoApprovalTime": "2016-02-19T23:33:55Z",
+    "AssignmentId": "3YW4XOSQKRKS5GYY2KYPBNRA9WF1U8",
+    "WorkerId": "AML7LH9SGCX6C",
+    "answers": {
+        "data": {
+            "mlikelihood": [
+                "5"
+            ],
+            "wcserious": [
+                "4"
+            ],
+            "engl": [
+                "Yes"
+            ],
+            "wclikely": [
+                "2"
+            ],
+            "condition_god": [
+                "5"
+            ],
+            "mlikely": [
+                "3"
+            ],
+            "s_cope": [
+                "3"
+            ],
+            "studycheck": [
+                ""
+            ],
+            "primetime": [
+                20.958
+            ],
+            "godbelief": [
+                "Yes"
+            ],
+            "control_thoughts": [
+                ""
+            ],
+            "wccope": [
+                "3"
+            ],
+            "mserious": [
+                "4"
+            ],
+            "wclikelihood": [
+                "3"
+            ],
+            "previouscheck": [
+                "No"
+            ],
+            "mcope": [
+                "5"
+            ],
+            "sserious": [
+                "6"
+            ],
+            "slikelihood": [
+                "6"
+            ],
+            "control_attncheck": [
+                ""
+            ],
+            "gen": [
+                "Female"
+            ],
+            "condition_control": [],
+            "race_ethn": [
+                "white"
+            ],
+            "age": [
+                "25"
+            ],
+            "god_thoughts": [
+                "It was interesting"
+            ],
+            "god_attncheck": [
+                "god is omnipresent (everywhere)"
+            ],
+            "slikely": [
+                "1"
+            ]
+        }
+    },
+    "AcceptTime": "2016-02-19T23:24:27Z",
+    "HITId": "36D1BWBEHN0EU9DRMJ2F1CO4HO5M20",
+    "Assignment": "",
+    "AssignmentStatus": "Approved",
+    "SubmitTime": "2016-02-19T23:28:55Z"
+}
