@@ -19,7 +19,7 @@ library(rjson)
 # Data prep
 
 ```{r Data prep}
-path <- "~/kflascheProject/Projects/mturk/"
+path <- "~/Desktop/Classes/Winter2015/Psych254/kflascheProject/Projects/mturk/"
 files <- dir(paste0(path,"sandbox-results/"), 
              pattern = "*.json")
 d.raw <- data.frame()
@@ -28,13 +28,31 @@ for (f in files) {
   jf <- paste0(path, "sandbox-results/",f)
   jd <- fromJSON(paste(readLines(jf), collapse=""))
   id <- data.frame(workerid = jd$WorkerId,
-                   timer = jd$answers$primetime,
-                   god_condition = jd$answers$condition_god,
-                   god_thoughts = jd$answers$god_thoughts,
-                   god_attncheck = jd$answers$god_attncheck,
-                   control_condition = jd$answers$condition_control,
-                   control_thoughts = jd$answers$control_thoughts,
-                   control_attncheck = jd$answers$control_attncheck)
+                   timer = as.numeric(jd$answers$data$primetime),
+                   interesting = as.numeric(paste0(jd$answers$data$condition_god, jd$answers$data$condition_control)),
+                   god_thoughts = jd$answers$data$god_thoughts,
+                   god_attncheck = jd$answers$data$god_attncheck,
+                   control_thoughts = jd$answers$data$control_thoughts,
+                   control_attncheck = jd$answers$data$control_attncheck,
+                   m_perceivedrisk1 = as.numeric(jd$answers$data$mlikelihood),
+                   m_perceivedrisk2 = as.numeric(jd$answers$data$mserious),
+                   m_perceivedrisk3 = as.numeric(jd$answers$data$mcope),
+                   m_risk = as.numeric(jd$answers$data$mlikely),
+                   wc_perceivedrisk1 = as.numeric(jd$answers$data$wclikelihood),
+                   wc_perceivedrisk2 = as.numeric(jd$answers$data$wcserious),
+                   wc_perceivedrisk3 = as.numeric(jd$answers$data$wccope),
+                   wc_risk = as.numeric(jd$answers$data$wclikely),
+                   s_perceivedrisk1 = as.numeric(jd$answers$data$slikelihood),
+                   s_perceivedrisk2 = as.numeric(jd$answers$data$sserious),
+                   s_perceivedrisk3 = as.numeric(jd$answers$data$s_cope),
+                   s_risk = as.numeric(jd$answers$data$slikely),
+                   belief_god = jd$answers$data$godbelief,
+                   gender = jd$answers$data$gen,
+                   age = as.numeric(jd$answers$data$age),
+                   race = jd$answers$data$race_ethn,
+                   english = jd$answers$data$engl,
+                   check_seen = jd$answers$data$previouscheck,
+                   check_hypothesis = jd$answers$data$studycheck)
   d.raw <- bind_rows(d.raw, id)
 }
 
@@ -42,89 +60,164 @@ for (f in files) {
 length(unique(d.raw$workerid))
 ```
 
-#Everything below still comes from Mike's class6b file
-Data cleanup
+#Data cleanup
 
-```{r}
-d <- filter(d.raw, scale != "training1") %>%
-  mutate(stars = as.numeric(as.character(stars))/20) %>%
-  select(-language)
+```{r Data cleanup}
+#Clean up factor structure
+d.raw$belief_god <- factor(d.raw$belief_god)
+levels(d.raw$belief_god) <- c("No","Yes")
 
-head(d)
+d.raw$gender <- factor(d.raw$gender)
+levels(d.raw$gender) <- c("Female","Male","Other")
+
+d.raw$english <- factor(d.raw$english)
+levels(d.raw$english) <- c("No","Yes")
+
+d.raw$check_seen <- factor(d.raw$check_seen)
+levels(d.raw$check_seen) <- c("No","Yes")
+
+#Create Condition Variable
+d.raw$condition = NA
+d.raw$condition[d.raw$control_thoughts==""] = "God"
+d.raw$condition[d.raw$god_thoughts==""] = "Control"
+d.raw$condition <- factor(d.raw$condition)
+
+#Composite Variables
+#Scenario 1: Perceived Risk
+#Reverse code "cope" variable
+d.raw$m_perceivedrisk3_reverse = reverse.code(-1, d.raw$m_perceivedrisk3) 
+#Alpha
+cor(d.raw[ ,c("m_perceivedrisk1", "m_perceivedrisk2", "m_perceivedrisk3_reverse")])
+alpha_m= cbind(d.raw$m_perceivedrisk1, d.raw$m_perceivedrisk2, d.raw$m_perceivedrisk3_reverse)
+ICC(alpha_m, missing=F)[[1]]$ICC[6]
+#Create Variable
+d.raw$m_perceivedrisk <- rowMeans(subset(d.raw, select = c("m_perceivedrisk1", "m_perceivedrisk2", "m_perceivedrisk3_reverse")), na.rm = TRUE)
+
+#Scenario 2: Perceived Risk
+#Reverse code "cope" variable
+d.raw$wc_perceivedrisk3_reverse = reverse.code(-1, d.raw$wc_perceivedrisk3) 
+#Alpha
+cor(d.raw[ ,c("wc_perceivedrisk1", "wc_perceivedrisk2", "wc_perceivedrisk3_reverse")])
+alpha_wc= cbind(d.raw$wc_perceivedrisk1, d.raw$wc_perceivedrisk2, d.raw$wc_perceivedrisk3_reverse)
+ICC(alpha_wc, missing=F)[[1]]$ICC[6]
+#Create Variable
+d.raw$wc_perceivedrisk <- rowMeans(subset(d.raw, select = c("wc_perceivedrisk1", "wc_perceivedrisk2", "wc_perceivedrisk3_reverse")), na.rm = TRUE)
+
+#Scenario 3: Perceived Risk
+#Reverse code "cope" variable
+d.raw$s_perceivedrisk3_reverse = reverse.code(-1, d.raw$s_perceivedrisk3) 
+#Alpha
+cor(d.raw[ ,c("s_perceivedrisk1", "s_perceivedrisk2", "s_perceivedrisk3_reverse")])
+alpha_s= cbind(d.raw$s_perceivedrisk1, d.raw$s_perceivedrisk2, d.raw$s_perceivedrisk3_reverse)
+ICC(alpha_s, missing=F)[[1]]$ICC[6]
+#Create Variable
+d.raw$s_perceivedrisk <- rowMeans(subset(d.raw, select = c("s_perceivedrisk1", "s_perceivedrisk2", "s_perceivedrisk3_reverse")), na.rm = TRUE)
+
+#Perceived Risk Item 1: Likelihood
+#Alpha
+cor(d.raw[ ,c("m_perceivedrisk1", "wc_perceivedrisk1", "s_perceivedrisk1")])
+alpha_risk1= cbind(d.raw$m_perceivedrisk1, d.raw$wc_perceivedrisk1, d.raw$s_perceivedrisk1)
+ICC(alpha_risk1, missing=F)[[1]]$ICC[6]
+#Create Variable
+d.raw$likelihood_perceivedrisk <- rowMeans(subset(d.raw, select = c("m_perceivedrisk1", "wc_perceivedrisk1", "s_perceivedrisk1")), na.rm = TRUE)
+
+#Perceived Risk Item 2: Seriousness
+#Alpha
+cor(d.raw[ ,c("m_perceivedrisk2", "wc_perceivedrisk2", "s_perceivedrisk2")])
+alpha_risk2= cbind(d.raw$m_perceivedrisk2, d.raw$wc_perceivedrisk2, d.raw$s_perceivedrisk2)
+ICC(alpha_risk2, missing=F)[[1]]$ICC[6]
+#Create Variable
+d.raw$serious_perceivedrisk <- rowMeans(subset(d.raw, select = c("m_perceivedrisk2", "wc_perceivedrisk2", "s_perceivedrisk2")), na.rm = TRUE)
+
+#Perceived Risk Item 3: Cope
+#Alpha
+cor(d.raw[ ,c("m_perceivedrisk3_reverse", "wc_perceivedrisk3_reverse", "s_perceivedrisk3_reverse")])
+alpha_risk3= cbind(d.raw$m_perceivedrisk3_reverse, d.raw$wc_perceivedrisk3_reverse, d.raw$s_perceivedrisk3_reverse)
+ICC(alpha_risk3, missing=F)[[1]]$ICC[6]
+#Create Variable
+d.raw$cope_perceivedrisk <- rowMeans(subset(d.raw, select = c("m_perceivedrisk3_reverse", "wc_perceivedrisk3_reverse", "s_perceivedrisk3_reverse")), na.rm = TRUE)
+
+#Perceived Risk Index: All Nine Items
+#Alpha
+cor(d.raw[ ,c("likelihood_perceivedrisk", "serious_perceivedrisk", "cope_perceivedrisk")])
+alpha_perceivedriskindex= cbind(d.raw$likelihood_perceivedrisk, d.raw$serious_perceivedrisk, d.raw$cope_perceivedrisk)
+ICC(alpha_perceivedriskindex, missing=F)[[1]]$ICC[6]
+#Create Variable
+d.raw$perceivedrisk_index <- rowMeans(subset(d.raw, select = c("likelihood_perceivedrisk", "serious_perceivedrisk", "cope_perceivedrisk")), na.rm = TRUE)
+
+#Risk-Taking Index: All 3 Items
+#Alpha
+cor(d.raw[ ,c("m_risk", "wc_risk", "s_risk")])
+alpha_risktakingindex= cbind(d.raw$m_risk, d.raw$wc_risk, d.raw$s_risk)
+ICC(alpha_risktakingindex, missing=F)[[1]]$ICC[6]
+#Create Variable
+d.raw$risktaking_index <- rowMeans(subset(d.raw, select = c("m_risk", "wc_risk", "s_risk")), na.rm = TRUE)
 ```
 
-# More sanity checks
+#Exclusion Criteria
+```{r Exclusions}
+#Remove participants who have seen the study before
+d = d.raw[d.raw$check_seen=="No",]
 
-Start with a histogram, *ALWAYS*. 
-```{r}
-qplot(judgment, data = d, binwidth=1) + 
-  xlim(c(1,6))
+#Remove participants who correctly report study hypothesis under "check_hypothesis"
+#d= d[-c(2),]
 
+#Create additional dataframe with only participants who spend at least 5 seconds reading prime
+d_time = d[d$timer>=5,] #Also check that this does not differ based on condition
 ```
 
-Break down by IVs.
-
+#Demographics
 ```{r}
-qplot(judgment, data = d, binwidth=1) + 
-  xlim(c(1,6)) + 
-  facet_grid(.~stars)
+#Full dataframe
+#Age
+summary(d$age)
+sd(d$age, na.rm=TRUE)
 
-qplot(judgment, data = d, binwidth=1) + 
-  xlim(c(1,6)) + 
-  facet_grid(.~scale)
+#Gender
+table(d$gender)
+Male = sum(d$gender=="Male")/length(d$gender)
+Male
+Female = sum(d$gender=="Female")/length(d$gender)
+Female
+Other = sum(d$gender=="Other")/length(d$gender)
+Other
 
-qplot(judgment, data = d, binwidth=1) + 
-  xlim(c(1,6)) + 
-  facet_grid(scale~stars)
+#Dataframe with exclusions
+#Age
+summary(d_time$age)
+sd(d_time$age, na.rm=TRUE)
+
+#Gender
+table(d_time$gender)
+Male = sum(d_time$gender=="Male")/length(d$gender)
+Male
+Female = sum(d_time$gender=="Female")/length(d$gender)
+Female
+Other = sum(d_time$gender=="Other")/length(d$gender)
+Other
 ```
 
-# Try using just ggplot to do our whole data analysis
+#Visualize Data: Histograms
+```{r Histograms, message=FALSE, error=FALSE, warning=FALSE}
+#Full dataframe
+#Risk-taking
+qplot(risktaking_index, data = d, binwidth=.5) + theme_bw()
+#Is there a difference in risk-taking by condition?
+qplot(risktaking_index, data = d, facets=~condition, binwidth=.5) + theme_bw()
 
-```{r}
-ggplot(d, aes(x = stars, y = judgment, col = degree)) + 
-  geom_jitter() + 
-  geom_smooth(method="lm", formula =  y ~ x + I(x^2)) +
-  facet_wrap(~scale)
+#Perceived Risk
+qplot(perceivedrisk_index, data = d, binwidth=.25) + theme_bw()
+#Is there a difference in perceived risk by condition?
+qplot(perceivedrisk_index, data = d, facets=~condition, binwidth=.25) + theme_bw()
+
+#Dataframe with exclusions
+#Risk-taking
+qplot(risktaking_index, data = d_time, binwidth=.5) + theme_bw()
+#Is there a difference in risk-taking by condition?
+qplot(risktaking_index, data = d_time, facets=~condition, binwidth=.5) + theme_bw()
+
+#Perceived Risk
+qplot(perceivedrisk_index, data = d_time, binwidth=.25) + theme_bw()
+#Is there a difference in perceived risk by condition?
+qplot(perceivedrisk_index, data = d_time, facets=~condition, binwidth=.25) + theme_bw()
 ```
-
-# Main Analysis (take 1)
-
-Aggregation step. 
-
-```{r}
-ms <- d %>%
-  group_by(scale, degree, stars) %>%
-  summarise(mean = mean(judgment), 
-            sem = sd(judgment) / sqrt(n()), 
-            ci95 = 1.96*sem)
-```
-
-plotting
-
-```{r}
-ggplot(ms, aes(x = stars, y = mean, col = degree)) + 
-  geom_line() + 
-  geom_pointrange(aes(ymin = mean - ci95, 
-                      ymax = mean + ci95)) + 
-  facet_wrap(~scale)
-```
-
-
-# Main Analysis (take 2)
-
-```{r}
-ms <- d %>%
-  group_by(scale, degree, stars) %>%
-  multi_boot_standard(column = "judgment")
-```
-
-Plotting step. 
-
-```{r}
-ggplot(ms, aes(x = stars, y = mean, col = degree)) + 
-  geom_line() + 
-  geom_pointrange(aes(ymin = ci_lower, 
-                      ymax = ci_upper)) + 
-  facet_wrap(~ scale)
-```
-
