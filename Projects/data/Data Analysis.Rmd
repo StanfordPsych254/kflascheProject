@@ -7,18 +7,19 @@ output:
     toc: true
 ---
 
-```{r Load Packages}
+```{r Load Packages, message=FALSE, warning=FALSE}
 rm(list=ls())
 library(tidyr)
 library(dplyr)
 library(ggplot2)
 library(langcog) 
 library(rjson)
+library(psych)
 ```
 
 # Data prep
 
-```{r Data prep}
+```{r Data prep, message=FALSE, warning=FALSE}
 path <- "~/Desktop/Classes/Winter2015/Psych254/kflascheProject/Projects/mturk/"
 files <- dir(paste0(path,"sandbox-results/"), 
              pattern = "*.json")
