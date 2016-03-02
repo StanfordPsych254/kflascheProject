@@ -15,19 +15,27 @@ library(ggplot2)
 library(langcog) 
 library(rjson)
 library(psych)
+library(lmerTest)
+library(multilevel)
+library(MBESS)
+library(knitr)
+library(broom)
+library(effsize)
+
+sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
+ci95 <- function(x) {sem(x) * 1.96}
 ```
 
 # Data prep
-
 ```{r Data prep, message=FALSE, warning=FALSE}
 path <- "~/Desktop/Classes/Winter2015/Psych254/kflascheProject/Projects/mturk/"
 files <- dir(paste0(path,"sandbox-results/"), 
              pattern = "*.json")
-d.raw <- data.frame()
+d.raw <- data.frame(stringsAsFactors = FALSE)
 
 for (f in files) {
   jf <- paste0(path, "sandbox-results/",f)
-  jd <- fromJSON(paste(readLines(jf), collapse=""))
+  jd <- fromJSON(file=jf)
   id <- data.frame(workerid = jd$WorkerId,
                    timer = as.numeric(jd$answers$data$primetime),
                    interesting = as.numeric(paste0(jd$answers$data$condition_god, jd$answers$data$condition_control)),
@@ -53,7 +61,8 @@ for (f in files) {
                    race = jd$answers$data$race_ethn,
                    english = jd$answers$data$engl,
                    check_seen = jd$answers$data$previouscheck,
-                   check_hypothesis = jd$answers$data$studycheck)
+                   check_hypothesis = jd$answers$data$studycheck,
+                   stringsAsFactors=FALSE)
   d.raw <- bind_rows(d.raw, id)
 }
 
@@ -62,8 +71,7 @@ length(unique(d.raw$workerid))
 ```
 
 #Data cleanup
-
-```{r Data cleanup}
+```{r Data cleanup, message=FALSE, warning=FALSE}
 #Clean up factor structure
 d.raw$belief_god <- factor(d.raw$belief_god)
 levels(d.raw$belief_god) <- c("No","Yes")
@@ -78,97 +86,25 @@ d.raw$check_seen <- factor(d.raw$check_seen)
 levels(d.raw$check_seen) <- c("No","Yes")
 
 #Create Condition Variable
-d.raw$condition = NA
-d.raw$condition[d.raw$control_thoughts==""] = "God"
-d.raw$condition[d.raw$god_thoughts==""] = "Control"
-d.raw$condition <- factor(d.raw$condition)
-
-#Composite Variables
-#Scenario 1: Perceived Risk
-#Reverse code "cope" variable
-d.raw$m_perceivedrisk3_reverse = reverse.code(-1, d.raw$m_perceivedrisk3) 
-#Alpha
-cor(d.raw[ ,c("m_perceivedrisk1", "m_perceivedrisk2", "m_perceivedrisk3_reverse")])
-alpha_m= cbind(d.raw$m_perceivedrisk1, d.raw$m_perceivedrisk2, d.raw$m_perceivedrisk3_reverse)
-ICC(alpha_m, missing=F)[[1]]$ICC[6]
-#Create Variable
-d.raw$m_perceivedrisk <- rowMeans(subset(d.raw, select = c("m_perceivedrisk1", "m_perceivedrisk2", "m_perceivedrisk3_reverse")), na.rm = TRUE)
-
-#Scenario 2: Perceived Risk
-#Reverse code "cope" variable
-d.raw$wc_perceivedrisk3_reverse = reverse.code(-1, d.raw$wc_perceivedrisk3) 
-#Alpha
-cor(d.raw[ ,c("wc_perceivedrisk1", "wc_perceivedrisk2", "wc_perceivedrisk3_reverse")])
-alpha_wc= cbind(d.raw$wc_perceivedrisk1, d.raw$wc_perceivedrisk2, d.raw$wc_perceivedrisk3_reverse)
-ICC(alpha_wc, missing=F)[[1]]$ICC[6]
-#Create Variable
-d.raw$wc_perceivedrisk <- rowMeans(subset(d.raw, select = c("wc_perceivedrisk1", "wc_perceivedrisk2", "wc_perceivedrisk3_reverse")), na.rm = TRUE)
-
-#Scenario 3: Perceived Risk
-#Reverse code "cope" variable
-d.raw$s_perceivedrisk3_reverse = reverse.code(-1, d.raw$s_perceivedrisk3) 
-#Alpha
-cor(d.raw[ ,c("s_perceivedrisk1", "s_perceivedrisk2", "s_perceivedrisk3_reverse")])
-alpha_s= cbind(d.raw$s_perceivedrisk1, d.raw$s_perceivedrisk2, d.raw$s_perceivedrisk3_reverse)
-ICC(alpha_s, missing=F)[[1]]$ICC[6]
-#Create Variable
-d.raw$s_perceivedrisk <- rowMeans(subset(d.raw, select = c("s_perceivedrisk1", "s_perceivedrisk2", "s_perceivedrisk3_reverse")), na.rm = TRUE)
-
-#Perceived Risk Item 1: Likelihood
-#Alpha
-cor(d.raw[ ,c("m_perceivedrisk1", "wc_perceivedrisk1", "s_perceivedrisk1")])
-alpha_risk1= cbind(d.raw$m_perceivedrisk1, d.raw$wc_perceivedrisk1, d.raw$s_perceivedrisk1)
-ICC(alpha_risk1, missing=F)[[1]]$ICC[6]
-#Create Variable
-d.raw$likelihood_perceivedrisk <- rowMeans(subset(d.raw, select = c("m_perceivedrisk1", "wc_perceivedrisk1", "s_perceivedrisk1")), na.rm = TRUE)
-
-#Perceived Risk Item 2: Seriousness
-#Alpha
-cor(d.raw[ ,c("m_perceivedrisk2", "wc_perceivedrisk2", "s_perceivedrisk2")])
-alpha_risk2= cbind(d.raw$m_perceivedrisk2, d.raw$wc_perceivedrisk2, d.raw$s_perceivedrisk2)
-ICC(alpha_risk2, missing=F)[[1]]$ICC[6]
-#Create Variable
-d.raw$serious_perceivedrisk <- rowMeans(subset(d.raw, select = c("m_perceivedrisk2", "wc_perceivedrisk2", "s_perceivedrisk2")), na.rm = TRUE)
-
-#Perceived Risk Item 3: Cope
-#Alpha
-cor(d.raw[ ,c("m_perceivedrisk3_reverse", "wc_perceivedrisk3_reverse", "s_perceivedrisk3_reverse")])
-alpha_risk3= cbind(d.raw$m_perceivedrisk3_reverse, d.raw$wc_perceivedrisk3_reverse, d.raw$s_perceivedrisk3_reverse)
-ICC(alpha_risk3, missing=F)[[1]]$ICC[6]
-#Create Variable
-d.raw$cope_perceivedrisk <- rowMeans(subset(d.raw, select = c("m_perceivedrisk3_reverse", "wc_perceivedrisk3_reverse", "s_perceivedrisk3_reverse")), na.rm = TRUE)
-
-#Perceived Risk Index: All Nine Items
-#Alpha
-cor(d.raw[ ,c("likelihood_perceivedrisk", "serious_perceivedrisk", "cope_perceivedrisk")])
-alpha_perceivedriskindex= cbind(d.raw$likelihood_perceivedrisk, d.raw$serious_perceivedrisk, d.raw$cope_perceivedrisk)
-ICC(alpha_perceivedriskindex, missing=F)[[1]]$ICC[6]
-#Create Variable
-d.raw$perceivedrisk_index <- rowMeans(subset(d.raw, select = c("likelihood_perceivedrisk", "serious_perceivedrisk", "cope_perceivedrisk")), na.rm = TRUE)
-
-#Risk-Taking Index: All 3 Items
-#Alpha
-cor(d.raw[ ,c("m_risk", "wc_risk", "s_risk")])
-alpha_risktakingindex= cbind(d.raw$m_risk, d.raw$wc_risk, d.raw$s_risk)
-ICC(alpha_risktakingindex, missing=F)[[1]]$ICC[6]
-#Create Variable
-d.raw$risktaking_index <- rowMeans(subset(d.raw, select = c("m_risk", "wc_risk", "s_risk")), na.rm = TRUE)
+d.raw$condition <- factor(ifelse(d.raw$god_thoughts=="", "Control", "God"))
 ```
 
 #Exclusion Criteria
-```{r Exclusions}
+```{r Exclusions, message=FALSE, warning=FALSE}
 #Remove participants who have seen the study before
 d = d.raw[d.raw$check_seen=="No",]
 
 #Remove participants who correctly report study hypothesis under "check_hypothesis"
 #d= d[-c(2),]
+length(unique(d.raw$workerid)) - length(unique(d$workerid)) #Number of participants excluded
 
 #Create additional dataframe with only participants who spend at least 5 seconds reading prime
-d_time = d[d$timer>=5,] #Also check that this does not differ based on condition
+d.time = d[d$timer>=5,] 
+length(unique(d$workerid)) - length(unique(d.time$workerid)) #Number of participants excluded
 ```
 
 #Demographics
-```{r}
+```{r Demographics, message=FALSE, warning=FALSE}
 #Full dataframe
 #Age
 summary(d$age)
@@ -185,40 +121,470 @@ Other
 
 #Dataframe with exclusions
 #Age
-summary(d_time$age)
-sd(d_time$age, na.rm=TRUE)
+summary(d.time$age)
+sd(d.time$age, na.rm=TRUE)
 
 #Gender
-table(d_time$gender)
-Male = sum(d_time$gender=="Male")/length(d$gender)
+table(d.time$gender)
+Male = sum(d.time$gender=="Male")/length(d.time$gender)
 Male
-Female = sum(d_time$gender=="Female")/length(d$gender)
+Female = sum(d.time$gender=="Female")/length(d.time$gender)
 Female
-Other = sum(d_time$gender=="Other")/length(d$gender)
+Other = sum(d.time$gender=="Other")/length(d.time$gender)
 Other
 ```
 
-#Visualize Data: Histograms
-```{r Histograms, message=FALSE, error=FALSE, warning=FALSE}
+#Preliminary Analysis: Linear Mixed Model
+```{r Analysis1, message=FALSE, warning=FALSE}
 #Full dataframe
-#Risk-taking
-qplot(risktaking_index, data = d, binwidth=.5) + theme_bw()
-#Is there a difference in risk-taking by condition?
-qplot(risktaking_index, data = d, facets=~condition, binwidth=.5) + theme_bw()
+#Turn data into long form
+d.gathered <- d %>%
+  gather(scenario, rating, 
+         starts_with("m_"), starts_with("wc_"), starts_with("s_")) %>%
+  separate(scenario, c("scenario", "risk"), "_") %>%
+  spread(risk, rating)
 
-#Perceived Risk
-qplot(perceivedrisk_index, data = d, binwidth=.25) + theme_bw()
-#Is there a difference in perceived risk by condition?
-qplot(perceivedrisk_index, data = d, facets=~condition, binwidth=.25) + theme_bw()
+#Visualize: Histograms
+#Risk-taking
+qplot(risk, data = d.gathered, binwidth=.5) + theme_bw() + xlim(0,7)
+#Is there an effect of condition on risk-taking?
+qplot(risk, data = d.gathered, facets=~condition, binwidth=.5) + theme_bw() + xlim(0,7)
+#Does scenario moderate the effect of condition on risk-taking?
+qplot(risk, data = d.gathered, facets=condition~scenario, binwidth=.5) + theme_bw() + xlim(0,7)
+
+#Analysis
+model1 = lmer(risk ~ condition + scenario + (1 | workerid), REML = TRUE, d.gathered)
+model2 = lmer(risk ~ condition*scenario + (1 | workerid), REML = TRUE, d.gathered)
+anova(model1, model2, refit = FALSE)
+
+#Graph
+ms1 <- d.gathered %>% 
+  group_by(condition, scenario) %>% 
+  summarise("mean.risk" = mean(risk),
+            "sem" = sem(risk),
+            "ci.lower" = mean(risk) - ci95(risk),
+            "ci.upper" = mean(risk) + ci95(risk))
+
+ggplot(ms1, aes(x = condition, y=mean.risk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.risk-sem, 
+                     ymax = mean.risk+sem)) +
+  facet_wrap(~scenario) +
+  theme_bw() +
+  ylim(0,7)
 
 #Dataframe with exclusions
+#Turn data into long form
+d.gathered.time <- d.time %>%
+  gather(scenario, rating, 
+         starts_with("m_"), starts_with("wc_"), starts_with("s_")) %>%
+  separate(scenario, c("scenario", "risk"), "_") %>%
+  spread(risk, rating)
+
+#Visualize: Histograms
 #Risk-taking
-qplot(risktaking_index, data = d_time, binwidth=.5) + theme_bw()
-#Is there a difference in risk-taking by condition?
-qplot(risktaking_index, data = d_time, facets=~condition, binwidth=.5) + theme_bw()
+qplot(risk, data = d.gathered.time, binwidth=.5) + theme_bw()
+#Is there an effect of condition on risk-taking?
+qplot(risk, data = d.gathered.time, facets=~condition, binwidth=.5) + theme_bw()
+#Does scenario moderate the effect of condition on risk-taking?
+qplot(risk, data = d.gathered.time, facets=condition~scenario, binwidth=.5) + theme_bw()
+
+#Analysis
+model3 = lmer(risk ~ condition + scenario + (1 | workerid), REML = TRUE, d.gathered.time)
+model4 = lmer(risk ~ condition*scenario + (1 | workerid), REML = TRUE, d.gathered.time)
+anova(model3, model4, refit = FALSE)
+
+#Graph
+ms2 <- d.gathered.time %>% 
+  group_by(condition, scenario) %>% 
+  summarise("mean.risk" = mean(risk),
+            "sem" = sem(risk),
+            "ci.lower" = mean(risk) - ci95(risk),
+            "ci.upper" = mean(risk) + ci95(risk))
+
+#ggplot(ms2, aes(x = condition, y=mean.risk, fill=condition)) +
+#  geom_bar(stat="identity", position="dodge") +
+#  geom_errorbar(aes(ymin = mean.risk-sem, 
+#                     ymax = mean.risk+sem)) +
+#  facet_wrap(~scenario) +
+#  theme_bw() +
+#  ylim(0,7)
+```
+
+#Main Analysis: Mediation
+**Data Setup**
+```{r Analysis2_Setup, message=FALSE, warning=FALSE}
+#Full Dataframe
+#Reverse code "cope" variable
+d <- d %>%
+  mutate(m_perceivedrisk3.reverse = as.numeric(reverse.code(-1, m_perceivedrisk3))) %>%
+  mutate(wc_perceivedrisk3.reverse = as.numeric(reverse.code(-1, wc_perceivedrisk3))) %>%
+  mutate(s_perceivedrisk3.reverse = as.numeric(reverse.code(-1, s_perceivedrisk3)))
+
+#Alpha for Perceived Risk Index: Nine Items
+alpha_pr= cbind(d$m_perceivedrisk1, d$m_perceivedrisk2, d$m_perceivedrisk3.reverse, d$wc_perceivedrisk1, d$wc_perceivedrisk2, d$wc_perceivedrisk3.reverse, d$s_perceivedrisk1, d$s_perceivedrisk2, d$s_perceivedrisk3.reverse)
+ICC(alpha_pr, missing=F)[[1]]$ICC[6]
+
+#Alpha for Risk Index: Three Items
+alpha_r= cbind(d$m_risk, d$wc_risk, d$s_risk)
+ICC(alpha_r, missing=F)[[1]]$ICC[6]
+
+#Create new variables
+d <- d %>%
+  mutate(m_perceivedrisk = (m_perceivedrisk1 + m_perceivedrisk2 + m_perceivedrisk3.reverse)/3) %>%
+  mutate(wc_perceivedrisk = (wc_perceivedrisk1 + wc_perceivedrisk2 + wc_perceivedrisk3.reverse)/3) %>%
+  mutate(s_perceivedrisk = (s_perceivedrisk1 + s_perceivedrisk2 + s_perceivedrisk3.reverse)/3) %>%
+  mutate(likelihood_pr = (m_perceivedrisk1 + wc_perceivedrisk1 + s_perceivedrisk1)/3) %>%
+  mutate(seriousness_pr = (m_perceivedrisk2 + wc_perceivedrisk2 + s_perceivedrisk2)/3) %>%
+  mutate(cope_pr = (m_perceivedrisk3.reverse + wc_perceivedrisk3.reverse + s_perceivedrisk3.reverse)/3) %>%
+  mutate(perceivedriskindex = (m_perceivedrisk + wc_perceivedrisk + s_perceivedrisk)/3) %>%
+  mutate(riskindex = (m_risk + wc_risk + s_risk)/3)
+
+#Dataframe with Exclusions
+#Reverse code "cope" variable
+d.time <- d.time %>%
+  mutate(m_perceivedrisk3.reverse = as.numeric(reverse.code(-1, m_perceivedrisk3))) %>%
+  mutate(wc_perceivedrisk3.reverse = as.numeric(reverse.code(-1, wc_perceivedrisk3))) %>%
+  mutate(s_perceivedrisk3.reverse = as.numeric(reverse.code(-1, s_perceivedrisk3)))
+
+#Alpha for Perceived Risk Index: Nine Items
+alpha_pr2= cbind(d.time$m_perceivedrisk1, d.time$m_perceivedrisk2, d.time$m_perceivedrisk3.reverse, d.time$wc_perceivedrisk1, d.time$wc_perceivedrisk2, d.time$wc_perceivedrisk3.reverse, d.time$s_perceivedrisk1, d.time$s_perceivedrisk2, d.time$s_perceivedrisk3.reverse)
+ICC(alpha_pr2, missing=F)[[1]]$ICC[6]
+
+#Alpha for Risk Index: Three Items
+alpha_r2= cbind(d.time$m_risk, d.time$wc_risk, d.time$s_risk)
+ICC(alpha_r2, missing=F)[[1]]$ICC[6]
+
+#Create new variables
+d.time <- d.time %>%
+  mutate(m_perceivedrisk = (m_perceivedrisk1 + m_perceivedrisk2 + m_perceivedrisk3.reverse)/3) %>%
+  mutate(wc_perceivedrisk = (wc_perceivedrisk1 + wc_perceivedrisk2 + wc_perceivedrisk3.reverse)/3) %>%
+  mutate(s_perceivedrisk = (s_perceivedrisk1 + s_perceivedrisk2 + s_perceivedrisk3.reverse)/3) %>%
+  mutate(likelihood_pr = (m_perceivedrisk1 + wc_perceivedrisk1 + s_perceivedrisk1)/3) %>%
+  mutate(seriousness_pr = (m_perceivedrisk2 + wc_perceivedrisk2 + s_perceivedrisk2)/3) %>%
+  mutate(cope_pr = (m_perceivedrisk3.reverse + wc_perceivedrisk3.reverse + s_perceivedrisk3.reverse)/3) %>%
+  mutate(perceivedriskindex = (m_perceivedrisk + wc_perceivedrisk + s_perceivedrisk)/3) %>%
+  mutate(riskindex = (m_risk + wc_risk + s_risk)/3)
+```
+
+**Visualize**
+```{r Analysis2_Visualize, message=FALSE, warning=FALSE}
+#Full dataframe
+#Histograms
+#Risk
+qplot(riskindex, data = d, binwidth=.5) + theme_bw() + xlim(0,7)
+#Risk by Condition
+qplot(riskindex, data = d, facets=~condition, binwidth=.5) + theme_bw() + xlim(0,7)
+#Pereived Risk
+qplot(perceivedriskindex, data = d, binwidth=.5) + theme_bw() + xlim(0,7)
+#Perceived Risk by Condition
+qplot(perceivedriskindex, data = d, facets=~condition, binwidth=.5) + theme_bw() + xlim(0,7)
+
+#Graphs
+ms3 <- d %>% 
+  group_by(condition) %>% 
+  summarise("mean.risk" = mean(riskindex),
+            "sem.risk" = sem(riskindex),
+            "ci.lower.risk" = mean(riskindex) - ci95(riskindex),
+            "ci.upper.risk" = mean(riskindex) + ci95(riskindex),
+            "mean.perceivedrisk" = mean(perceivedriskindex),
+            "sem.perceivedrisk" = sem(perceivedriskindex),
+            "ci.lower.perceivedrisk" = mean(perceivedriskindex) - ci95(perceivedriskindex),
+            "ci.upper.perceivedrisk" = mean(perceivedriskindex) + ci95(perceivedriskindex))
+
+#Risk
+ggplot(ms3, aes(x = condition, y=mean.risk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.risk-sem.risk, 
+                     ymax = mean.risk+sem.risk)) +
+  theme_bw() +
+  ylim(0,7)
 
 #Perceived Risk
-qplot(perceivedrisk_index, data = d_time, binwidth=.25) + theme_bw()
-#Is there a difference in perceived risk by condition?
-qplot(perceivedrisk_index, data = d_time, facets=~condition, binwidth=.25) + theme_bw()
+ggplot(ms3, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
+                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
+  theme_bw() +
+  ylim(0,7)
+
+#Dataframe with exclusions
+#Histograms
+#Risk
+qplot(riskindex, data = d.time, binwidth=.5) + theme_bw() + xlim(0,7)
+#Risk by Condition
+qplot(riskindex, data = d.time, facets=~condition, binwidth=.5) + theme_bw() + xlim(0,7)
+#Pereived Risk
+qplot(perceivedriskindex, data = d.time, binwidth=.5) + theme_bw() + xlim(0,7)
+#Perceived Risk by Condition
+qplot(perceivedriskindex, data = d.time, facets=~condition, binwidth=.5) + theme_bw() + xlim(0,7)
+
+#Graphs
+ms4 <- d.time %>% 
+  group_by(condition) %>% 
+  summarise("mean.risk" = mean(riskindex),
+            "sem.risk" = sem(riskindex),
+            "ci.lower.risk" = mean(riskindex) - ci95(riskindex),
+            "ci.upper.risk" = mean(riskindex) + ci95(riskindex),
+            "mean.perceivedrisk" = mean(perceivedriskindex),
+            "sem.perceivedrisk" = sem(perceivedriskindex),
+            "ci.lower.perceivedrisk" = mean(perceivedriskindex) - ci95(perceivedriskindex),
+            "ci.upper.perceivedrisk" = mean(perceivedriskindex) + ci95(perceivedriskindex))
+
+#Risk
+ggplot(ms4, aes(x = condition, y=mean.risk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.risk-sem.risk, 
+                     ymax = mean.risk+sem.risk)) +
+  theme_bw() +
+  ylim(0,7)
+
+#Perceived Risk
+ggplot(ms4, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
+                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
+  theme_bw() +
+  ylim(0,7)
+```
+
+**Main Analysis: (Overall) Mediation**
+```{r Analysis2_OverallMediation, message=FALSE, warning=FALSE}
+#Function for printing cleaner output from sobel
+sob_print <- function(sob){
+ df <- do.call(rbind, sob)
+ rnames <- rownames(df)
+ rnames[c(1,3,6)] <- c("Mod1: Y~X", "Mod2: Y~X+M", "Mod3: M~X")
+ rownames(df) <- rnames
+ 
+ return(list("Models"=df[1:7,],
+             "Vals"=data.frame("IndirectEffect"=df[8,1],
+                               "SE"=df[9,1],
+                               "Z"=df[10,1],
+                               "N"=df[11,1])))
+}
+
+#Full Dataframe
+#Sobel
+sobel = sobel(d$condition, d$perceivedriskindex, d$riskindex)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$perceivedriskindex, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Dataframe with Exclusions
+#Sobel
+#Check to make sure this works when sample size is larger:
+#sobel = sobel(d.time$condition, d.time$perceivedriskindex, d.time$riskindex) 
+#sobel_chart <- sob_print(sobel)
+#kable(sobel_chart$Models)
+#kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$perceivedriskindex, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+```
+
+**Additional Analysis: Mediation for each scenario**
+```{r Analysis2_Mediation_EachScenario, message=FALSE, warning=FALSE}
+#Full Dataframe
+#Scenario 1: Motorcycle
+#Sobel
+sobel = sobel(d$condition, d$m_perceivedrisk, d$m_risk)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$m_perceivedrisk, dv = d$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Scenario 2: Wilderness Camping
+#Sobel
+sobel = sobel(d$condition, d$wc_perceivedrisk, d$wc_risk)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$wc_perceivedrisk, dv = d$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Scenario 3: Skiing
+#Sobel
+sobel = sobel(d$condition, d$s_perceivedrisk, d$s_risk)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$s_perceivedrisk, dv = d$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+
+#Dataframe with Exclusions
+#Scenario 1: Motorcycle
+#Sobel
+#Check to make sure this works when sample size is larger:
+#sobel = sobel(d.time$condition, d.time$m_perceivedrisk, d.time$m_risk) 
+#sobel_chart <- sob_print(sobel)
+#kable(sobel_chart$Models)
+#kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$m_perceivedrisk, dv = d.time$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Scenario 2: Wilderness Camping
+#Sobel
+#Check to make sure this works when sample size is larger:
+#sobel = sobel(d.time$condition, d.time$wc_perceivedrisk, d.time$wc_risk) 
+#sobel_chart <- sob_print(sobel)
+#kable(sobel_chart$Models)
+#kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$wc_perceivedrisk, dv = d.time$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Scenario 3: Skiing
+#Sobel
+#Check to make sure this works when sample size is larger:
+#sobel = sobel(d.time$condition, d.time$s_perceivedrisk, d.time$s_risk) 
+#sobel_chart <- sob_print(sobel)
+#kable(sobel_chart$Models)
+#kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$s_perceivedrisk, dv = d.time$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+```
+
+**Additional Analysis: Mediation by each perceived risk item**
+```{r Analysis2_Mediation_EachPRItem, message=FALSE, warning=FALSE}
+#Full Dataframe
+#Likelihood
+#Sobel
+sobel = sobel(d$condition, d$likelihood_pr, d$riskindex)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$likelihood_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Seriousness
+#Sobel
+sobel = sobel(d$condition, d$seriousness_pr, d$riskindex)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$seriousness_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Coping
+#Sobel
+sobel = sobel(d$condition, d$cope_pr, d$riskindex)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$cope_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+
+#Dataframe with Exclusions
+#Likelihood
+#Sobel
+#Check to make sure this works when sample size is larger:
+#sobel = sobel(d.time$condition, d.time$likelihood_pr, d.time$riskindex) 
+#sobel_chart <- sob_print(sobel)
+#kable(sobel_chart$Models)
+#kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$likelihood_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Seriousness
+#Sobel
+#Check to make sure this works when sample size is larger:
+#sobel = sobel(d.time$condition, d.time$seriousness_pr, d.time$riskindex) 
+#sobel_chart <- sob_print(sobel)
+#kable(sobel_chart$Models)
+#kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$seriousness_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Coping
+#Sobel
+#Check to make sure this works when sample size is larger:
+#sobel = sobel(d.time$condition, d.time$cope_pr, d.time$riskindex) 
+#sobel_chart <- sob_print(sobel)
+#kable(sobel_chart$Models)
+#kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$cope_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+```
+
+#Additional Analysis: Moderation by God Belief?
+```{r Analysis3_Moderation, message=FALSE, warning=FALSE}
+#Full dataframe
+#Summary
+table(d$condition, d$belief_god)
+ms_beliefgod <- d %>% 
+  group_by(belief_god, condition) %>% 
+  summarise("mean" = mean(riskindex),
+            "sd" = sd(riskindex))
+
+#Best model?
+model5 = lm(riskindex ~ condition, d)
+model6 = lm(riskindex ~ condition + belief_god, d)
+model7 = lm(riskindex ~ condition*belief_god, d)
+anova(model5, model6, model7)           
+
+#Effect of Condition for Non-believers
+summary(lm(riskindex ~ condition, d[d$belief_god=="No",]))
+d.extra = d[d$belief_god=="No",]
+cohen.d(c(0,1), as.numeric(d.extra$condition))
+
+#Effect of Condition for Believers
+#summary(lm(riskindex ~ condition, d[d$belief_god=="Yes",]))
+d.extra2 = d[d$belief_god=="Yes",]
+cohen.d(c(0,1), as.numeric(d.extra2$condition))
+
+#Dataframe with exclusions
+#Summary
+table(d.time$condition, d.time$belief_god)
+ms_beliefgod2 <- d.time %>% 
+  group_by(belief_god, condition) %>% 
+  summarise("mean" = mean(riskindex),
+            "sd" = sd(riskindex))
+
+#Best model?
+model8 = lm(riskindex ~ condition, d.time)
+model9 = lm(riskindex ~ condition + belief_god, d.time)
+model10 = lm(riskindex ~ condition*belief_god, d.time)
+anova(model8, model9, model10)           
+
+#Effect of Condition for Non-believers
+#summary(lm(riskindex ~ condition, d.time[d.time$belief_god=="No",]))
+d.extra3 = d.time[d.time$belief_god=="No",]
+cohen.d(c(0,1), as.numeric(d.extra3$condition))
+
+#Effect of Condition for Believers
+#summary(lm(riskindex ~ condition, d.time[d.time$belief_god=="Yes",]))
+d.extra4 = d.time[d.time$belief_god=="Yes",]
+cohen.d(c(0,1), as.numeric(d.extra4$condition))
 ```
