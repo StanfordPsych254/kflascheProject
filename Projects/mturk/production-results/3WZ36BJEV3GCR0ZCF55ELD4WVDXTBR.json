@@ -1,0 +1,91 @@
+{
+    "ApprovalTime": "2016-03-08T01:55:27Z",
+    "AutoApprovalTime": "2016-03-08T01:50:52Z",
+    "AssignmentId": "3WZ36BJEV3GCR0ZCF55ELD4WVDXTBR",
+    "WorkerId": "A2J6MMNWUJQUXS",
+    "answers": {
+        "data": {
+            "mlikelihood": [
+                "3"
+            ],
+            "wcserious": [
+                "4"
+            ],
+            "engl": [
+                "Yes"
+            ],
+            "wclikely": [
+                "3"
+            ],
+            "condition_god": [],
+            "mlikely": [
+                "1"
+            ],
+            "s_cope": [
+                "1"
+            ],
+            "studycheck": [
+                "How we view the odds of something happening to us."
+            ],
+            "primetime": [
+                17.942
+            ],
+            "godbelief": [
+                "Yes"
+            ],
+            "control_thoughts": [
+                "It is interesting to read how they classify a planet"
+            ],
+            "wccope": [
+                "4"
+            ],
+            "mserious": [
+                "7"
+            ],
+            "wclikelihood": [
+                "2"
+            ],
+            "previouscheck": [
+                "No"
+            ],
+            "mcope": [
+                "2"
+            ],
+            "sserious": [
+                "7"
+            ],
+            "slikelihood": [
+                "6"
+            ],
+            "control_attncheck": [
+                "No.  It was discovered that it didn't meet all three requirements."
+            ],
+            "gen": [
+                "Female"
+            ],
+            "condition_control": [
+                "7"
+            ],
+            "race_ethn": [
+                "white"
+            ],
+            "age": [
+                "43"
+            ],
+            "god_thoughts": [
+                ""
+            ],
+            "god_attncheck": [
+                ""
+            ],
+            "slikely": [
+                "1"
+            ]
+        }
+    },
+    "AcceptTime": "2016-03-08T01:30:42Z",
+    "HITId": "3N3WJQXELSQRXQTIX05B99VPXO22L0",
+    "Assignment": "",
+    "AssignmentStatus": "Approved",
+    "SubmitTime": "2016-03-08T01:45:52Z"
+}

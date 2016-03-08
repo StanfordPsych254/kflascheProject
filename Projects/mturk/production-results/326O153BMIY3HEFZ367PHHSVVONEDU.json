@@ -1,0 +1,91 @@
+{
+    "ApprovalTime": "2016-03-08T01:45:27Z",
+    "AutoApprovalTime": "2016-03-08T01:44:35Z",
+    "AssignmentId": "326O153BMIY3HEFZ367PHHSVVONEDU",
+    "WorkerId": "A3N8JP3QR3VPE8",
+    "answers": {
+        "data": {
+            "mlikelihood": [
+                "3"
+            ],
+            "wcserious": [
+                "4"
+            ],
+            "engl": [
+                "Yes"
+            ],
+            "wclikely": [
+                "2"
+            ],
+            "condition_god": [],
+            "mlikely": [
+                "1"
+            ],
+            "s_cope": [
+                "4"
+            ],
+            "studycheck": [
+                "reading a passage and making intrepretations"
+            ],
+            "primetime": [
+                29.969
+            ],
+            "godbelief": [
+                "Yes"
+            ],
+            "control_thoughts": [
+                "I thought it was interesting and that I learned something new about planets"
+            ],
+            "wccope": [
+                "5"
+            ],
+            "mserious": [
+                "5"
+            ],
+            "wclikelihood": [
+                "5"
+            ],
+            "previouscheck": [
+                "No"
+            ],
+            "mcope": [
+                "4"
+            ],
+            "sserious": [
+                "5"
+            ],
+            "slikelihood": [
+                "5"
+            ],
+            "control_attncheck": [
+                "No pluto is not a planet"
+            ],
+            "gen": [
+                "Female"
+            ],
+            "condition_control": [
+                "5"
+            ],
+            "race_ethn": [
+                "white"
+            ],
+            "age": [
+                "50"
+            ],
+            "god_thoughts": [
+                ""
+            ],
+            "god_attncheck": [
+                ""
+            ],
+            "slikely": [
+                "2"
+            ]
+        }
+    },
+    "AcceptTime": "2016-03-08T01:28:17Z",
+    "HITId": "3N3WJQXELSQRXQTIX05B99VPXO22L0",
+    "Assignment": "",
+    "AssignmentStatus": "Approved",
+    "SubmitTime": "2016-03-08T01:39:35Z"
+}

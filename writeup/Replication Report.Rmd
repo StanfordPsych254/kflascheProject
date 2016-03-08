@@ -55,7 +55,9 @@ I was fortunate enough to have the original study shared with me by the authors.
 *"Imagine that you like to ski, and you are deciding whether or not to spend the day backcountry skiing. Backcountry skiing is skiing on an unmarked slope that is not maintained, monitored, or patrolled by anyone. You are thinking that backcountry skiing would be a great experience. However, if you decide to take the risk and go backcountry skiing, there is a chance that you could get injured by an avalanche, rock fall, or weather."*
 
 ### Procedure
-I will follow the original study's procedure exactly, unless otherwise noted in the "Differences from Original Study" section.  Is it worth noting that the "ostensibly unrelated survey" (see reference below) will be introduced in the exact same manner in my replication as in the original study.  Namely, the study description and instructions page of the study will note that the session consists of two separate surveys.  Additionally, the second survey will be introduced with the brief transition text, "You will now complete questions for a separate survey. Please click the next button to continue."  The original study's procedure is outlined below: 
+I will follow the original study's procedure exactly, unless otherwise noted in the "Differences from Original Study" section.  Is it worth noting that the "ostensibly unrelated survey" (see reference below) will be introduced in the exact same manner in my replication as in the original study.  Namely, the study description and instructions page of the study will note that the session consists of two separate surveys.  Additionally, the second survey will be introduced with the brief transition text, "You will now complete questions for a separate survey. Please click the next button to continue."  
+
+The original study's procedure is outlined below: <br>
 “One hundred one participants (mean age = 31.4 years; 64.4% male, 35.6% female) completed this study. We obtained these participants by posting 100 HITs on MTurk. We randomly assigned participants to either the God condition or the control condition from Study 1d. In an ostensibly unrelated survey, participants read three scenarios that each described a risky decision (motorcycling without a helmet, wilderness camping, and backcountry skiing). After reading each scenario, participants completed three items assessing their perceptions of danger: “If you did [e.g., go wilderness camping], what is the likelihood that you will get injured?” (1 = extremely unlikely, 7 = extremely likely), “If you did get injured while [e.g., wilderness camping], how serious do you think the injury would be?” (1 = not serious at all, 7 = extremely serious), and “If you did get injured while [e.g., wilderness camping], how well would you be able to cope with the injury?” (1 = not well at all, 7 = extremely well; reverse coded). We created an index of the nine subjective-danger-perception items (with higher scores representing more perceived danger; α  = .71). Finally, participants reported how willing they would be to take each risk (1 = not likely at all, 7 = extremely likely), which yielded an index of risk taking (α  = .60).”
 
 ### Analysis Plan
@@ -65,12 +67,14 @@ First, the original authors found that a linear mixed model that included scenar
 
 Next, like the original authors, I will run a mediation analysis: "Our primary analysis tested the indirect effect (Hayes, 2013) using willingness to take risks as the dependent variable, priming condition (God = 1, control = 0) as the independent variable, and perceived risk as the mediating variable—this test confirmed our predictions. Specifically, participants in the God condition reported a higher willingness to take risks, *b* = 0.61, *t*(99) = 2.29, *p* = .024, and also perceived less danger associated with these risks, *b* = −0.44, *t*(99) = −2.97, *p* = .004, than did participants in the control condition. When the effects of God condition and perceived danger were both included in the model, the indirect effect (i.e., through the mediator) was significant (95% confidence interval, or CI = [0.12, 0.64]), whereas the direct effect (i.e., the effect of condition independent of the mediator) was not significant, *b* = 0.28, *t*(98) = 1.12, *p* = .267."
 
+![alt text](http://www.stanford.edu/~kflasche/proj/MediationModel_image.png)
+
 Additionally, as the authors included in their Supplemental Material, I will run the above mediation analysis three additional times, treating each item in the perceived risk index individually as the mediating variable. The authors found that, "A mediation comparison analysis (Hayes, 2013) revealed no significant differences between the indirect effects. Specifically, the analysis revealed no difference between the coping ability and the seriousness of negative consequences indirect effects (CI: -.5741 to .0569), no difference between the likelihood of negative consequences and coping ability indirect effects (CI: -.5720 to .0052), and no difference between the likelihood of negative consequences and seriousness of negative consequences indirect effects (CI: -.2844 to .1239)."
 
 Finally, as the authors depicted in their Supplemental Material, I will use participants' response to the question, "Do you believe in God?" ("yes" or "no"), asked at the end of the study, to determine if belief in God moderates the effect of condition on willingness to take risks.  The authors found that belief in God did not moderate the effect of condition on risk taking (believers: *t*(66) = 1.54, *p* = .128, *d* = .37; non-believers: *t*(30) = 1.69, *p* = .102, *d* = .62).
 
 ### Differences from Original Study
-Given that the original study was run on MTurk and that I have all the exact materials from the original study, I anticipate few differences from the original study.  The differences I do anticipate are listed below:
+Given that the original study was run on MTurk and that I have all the exact materials from the original study, I anticipate few significant differences from the original study.  The differences I do anticipate are listed below:
 
 a) Whereas the original study had a sample size of 101 participants (with 63% power), I will use 200 participants in order to achieve 90% power.  I do not anticipate that this difference will have an effect on the study's findings, as, with more power, I should be more likely to replicate the original study's findings.
 b) The original study was framed as taking approximately 8-10 minutes.  If the authors paid the standard rate on MTurk, this means that workers would have received about 80 cents for taking the original study.  However, I believe that the study can be completed in 3 minutes (and have changed this in the study description and instructions page that workers will see).  Therefore, workers will be paid 30 cents for completing the replication.  It is possible that this could have an effect on the replication's findings if participants are less incentivized to read information closely or answer questions accurately.  However, I have limited resources for running the replication.
@@ -79,3 +83,599 @@ d) Because I have not run any previous experiments on God and risk taking, I wil
 e) Further, I have added one more additional question to the end of my replication ("In your opinion, what were these two surveys about?").  If any participants correctly report the hypothesis of the experiment, they will be excluded from all analyses.  Although the original authors did not do this, I think that this is an important check to include given the minimal separation between the two ostensibly unrelated parts of the survey in the original study (and thus in my replication).  Because I expect few participants to correctly report the hypothesis of the experiment, I do not anticipate that this difference will have an effect on the study's findings.  However, excluding such participants will help ensure that my replication's findings are due to a real effect, rather than demand effects.
 f) The authors do not specify whether or not they required that participants answer questions.  I have chosen to require that participants answer questions by adding an error message ("Please answer all of the questions below before continuing to the next page") if at least one question on a page is left unanswered.  All questions will be required, except for the last page in the replication, which will consist of demographics questions and the question in d) above.  For these questions, I will use an error message ("There are unanswered questions on this page. Are you sure you want to continue?") if at least one question on the page is left unanswered, but will not prevent participants from continuing on in the study if they so choose.  I do not anticipate that this difference will have an effect on the study's findings.
 g) Although the original authors did not do this, I will run my analyses both on all participants and only on participants who spend at least 5 seconds reading the priming excerpt (see “Analysis Plan”).  These additional analyses will serve as an important check to make sure that MTurk workers are paying attention, which is especially important in a priming study. If many participants do not spend at least 5 seconds reading the priming information, then I would anticipate that these analyses could lead to different results (i.e. the analyses on all participants may not show the hypothesized effect).
+
+## (Post Data Collection) Methods Addendum
+### Differences from pre-data collection methods plan
+TO BE COMPLETED.
+
+## Results
+### Data prep
+```{r Load Packages, message=FALSE, warning=FALSE, echo=FALSE}
+rm(list=ls())
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(langcog) 
+library(rjson)
+library(psych)
+library(lmerTest)
+library(multilevel)
+library(MBESS)
+library(knitr)
+library(broom)
+library(effsize)
+library(scales)
+
+sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
+ci95 <- function(x) {sem(x) * 1.96}
+```
+
+```{r Data prep, message=FALSE, warning=FALSE}
+path <- "~/Desktop/Classes/Winter2015/Psych254/kflascheProject/Projects/mturk/"
+files <- dir(paste0(path,"production-results/"), 
+             pattern = "*.json")
+d.raw <- data.frame(stringsAsFactors = FALSE)
+
+for (f in files) {
+  jf <- paste0(path, "production-results/",f)
+  jd <- fromJSON(file=jf)
+  id <- data.frame(workerid = jd$WorkerId,
+                   timer = as.numeric(jd$answers$data$primetime),
+                   interesting = as.numeric(paste0(jd$answers$data$condition_god, jd$answers$data$condition_control)),
+                   god_thoughts = jd$answers$data$god_thoughts,
+                   god_attncheck = jd$answers$data$god_attncheck,
+                   control_thoughts = jd$answers$data$control_thoughts,
+                   control_attncheck = jd$answers$data$control_attncheck,
+                   m_perceivedrisk1 = as.numeric(jd$answers$data$mlikelihood),
+                   m_perceivedrisk2 = as.numeric(jd$answers$data$mserious),
+                   m_perceivedrisk3 = as.numeric(jd$answers$data$mcope),
+                   m_risk = as.numeric(jd$answers$data$mlikely),
+                   wc_perceivedrisk1 = as.numeric(jd$answers$data$wclikelihood),
+                   wc_perceivedrisk2 = as.numeric(jd$answers$data$wcserious),
+                   wc_perceivedrisk3 = as.numeric(jd$answers$data$wccope),
+                   wc_risk = as.numeric(jd$answers$data$wclikely),
+                   s_perceivedrisk1 = as.numeric(jd$answers$data$slikelihood),
+                   s_perceivedrisk2 = as.numeric(jd$answers$data$sserious),
+                   s_perceivedrisk3 = as.numeric(jd$answers$data$s_cope),
+                   s_risk = as.numeric(jd$answers$data$slikely),
+                   belief_god = jd$answers$data$godbelief,
+                   gender = jd$answers$data$gen,
+                   age = as.numeric(jd$answers$data$age),
+                   race = jd$answers$data$race_ethn,
+                   english = jd$answers$data$engl,
+                   check_seen = jd$answers$data$previouscheck,
+                   check_hypothesis = jd$answers$data$studycheck,
+                   stringsAsFactors=FALSE)
+  d.raw <- bind_rows(d.raw, id)
+}
+```
+
+```{r Data cleanup, message=FALSE, warning=FALSE}
+#Clean up factor structure
+d.raw$belief_god <- factor(d.raw$belief_god)
+levels(d.raw$belief_god) <- c("No","Yes")
+
+d.raw$gender <- factor(d.raw$gender)
+levels(d.raw$gender) <- c("Female","Male","Other")
+
+d.raw$english <- factor(d.raw$english)
+levels(d.raw$english) <- c("No","Yes")
+
+d.raw$check_seen <- factor(d.raw$check_seen)
+levels(d.raw$check_seen) <- c("No","Yes")
+
+#Create Condition Variable
+d.raw$condition <- factor(ifelse(d.raw$god_thoughts=="", "Control", "God"))
+```
+
+### Actual Sample
+**Sample Size** 
+```{r Sample Size, message=FALSE, warning=FALSE, echo=FALSE}
+#Number of participants
+numberofp = length(unique(d.raw$workerid))
+```
+`r numberofp` participants were recruited for this experiment.
+
+**Exclusion Criteria and Demographics**
+```{r Exclusions and Demographics, message=FALSE, warning=FALSE, echo=FALSE}
+#Exclusion Criteria
+
+#Remove participants who have seen the study before
+d = d.raw[d.raw$check_seen=="No",]
+
+#Remove participants who correctly report study hypothesis under "check_hypothesis"
+#d= d[-c(2),]
+x1 = length(unique(d.raw$workerid)) - length(unique(d$workerid)) #Number of participants excluded
+
+#Create additional dataframe with only participants who spend at least 5 seconds reading prime
+d.time = d[d$timer>=5,] 
+x2 = length(unique(d$workerid)) - length(unique(d.time$workerid)) #Number of participants excluded
+
+
+#Demographics
+
+#Full dataframe
+#Age
+agesum = summary(d$age)
+agesd = sd(d$age, na.rm=TRUE)
+
+#Gender
+tablegender = table(d$gender)
+Male = sum(d$gender=="Male")/length(d$gender)
+Female = sum(d$gender=="Female")/length(d$gender)
+Other = sum(d$gender=="Other")/length(d$gender)
+
+#Dataframe with exclusions
+#Age
+agesum2 = summary(d.time$age)
+agesd2 = sd(d.time$age, na.rm=TRUE)
+
+#Gender
+tablegender2 = table(d.time$gender)
+Male2 = sum(d.time$gender=="Male")/length(d.time$gender)
+Female2 = sum(d.time$gender=="Female")/length(d.time$gender)
+Other2 = sum(d.time$gender=="Other")/length(d.time$gender)
+```
+As specified under d and e of the "Differences from Original Study" section, `r x1` participants were excluded for either reporting that they had seen the study before and/or correctly reporting the hypothesis of the experiment.
+
+This left a total of `r length(unique(d$workerid))` participants.  As specified in my analysis plan, I ran all analyses on these `r length(unique(d$workerid))` participants (mean age = `r mean(d$age)` years; `r percent(Male)` male, `r percent(Female)` female), as well as only on participants who spent at least 5 seconds reading the priming (God vs. control) excerpt, which represented `r length(unique(d.time$workerid))` participants (mean age = `r mean(d.time$age)` years; `r percent(Male2)` male, `r percent(Female2)` female).
+
+### Confirmatory Analysis
+**Preliminary Analysis: Linear Mixed Models**
+```{r PrelimAnalysis, message=FALSE, warning=FALSE}
+#Full dataframe
+#Turn data into long form
+d.gathered <- d %>%
+  gather(scenario, rating, 
+         starts_with("m_"), starts_with("wc_"), starts_with("s_")) %>%
+  separate(scenario, c("scenario", "risk"), "_") %>%
+  spread(risk, rating)
+
+#Visualize: Histograms
+#Risk-taking
+qplot(risk, data = d.gathered, binwidth=1) + theme_bw() + xlim(0,7)
+#Is there an effect of condition on risk-taking?
+qplot(risk, data = d.gathered, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
+#Does scenario moderate the effect of condition on risk-taking?
+qplot(risk, data = d.gathered, facets=condition~scenario, binwidth=1) + theme_bw() + xlim(0,7)
+
+#Analysis
+model1 = lmer(risk ~ condition + scenario + (1 | workerid), REML = TRUE, d.gathered)
+summary(model1)
+model2 = lmer(risk ~ condition*scenario + (1 | workerid), REML = TRUE, d.gathered)
+summary(model2)
+anova(model1, model2, refit = FALSE)
+
+#Graph
+ms1 <- d.gathered %>% 
+  group_by(condition, scenario) %>% 
+  summarise("mean.risk" = mean(risk),
+            "sem" = sem(risk),
+            "ci.lower" = mean(risk) - ci95(risk),
+            "ci.upper" = mean(risk) + ci95(risk))
+
+ggplot(ms1, aes(x = condition, y=mean.risk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.risk-sem, 
+                     ymax = mean.risk+sem)) +
+  facet_wrap(~scenario) +
+  theme_bw() +
+  ylim(0,7)
+
+#Dataframe with exclusions
+#Turn data into long form
+d.gathered.time <- d.time %>%
+  gather(scenario, rating, 
+         starts_with("m_"), starts_with("wc_"), starts_with("s_")) %>%
+  separate(scenario, c("scenario", "risk"), "_") %>%
+  spread(risk, rating)
+
+#Visualize: Histograms
+#Risk-taking
+qplot(risk, data = d.gathered.time, binwidth=1) + theme_bw() + xlim(0,7)
+#Is there an effect of condition on risk-taking?
+qplot(risk, data = d.gathered.time, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
+#Does scenario moderate the effect of condition on risk-taking?
+qplot(risk, data = d.gathered.time, facets=condition~scenario, binwidth=1) + theme_bw() + xlim(0,7)
+
+#Analysis
+model3 = lmer(risk ~ condition + scenario + (1 | workerid), REML = TRUE, d.gathered.time)
+summary(model3)
+model4 = lmer(risk ~ condition*scenario + (1 | workerid), REML = TRUE, d.gathered.time)
+summary(model4)
+anova(model3, model4, refit = FALSE)
+
+#Graph
+ms2 <- d.gathered.time %>% 
+  group_by(condition, scenario) %>% 
+  summarise("mean.risk" = mean(risk),
+            "sem" = sem(risk),
+            "ci.lower" = mean(risk) - ci95(risk),
+            "ci.upper" = mean(risk) + ci95(risk))
+
+ggplot(ms2, aes(x = condition, y=mean.risk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.risk-sem, 
+                     ymax = mean.risk+sem)) +
+  facet_wrap(~scenario) +
+  theme_bw() +
+  ylim(0,7)
+```
+
+**Main Analysis: Mediation**
+```{r Mediation_DataSetup, message=FALSE, warning=FALSE, echo=FALSE}
+#Data Setup
+
+#Full Dataframe
+#Reverse code "cope" variable
+d <- d %>%
+  mutate(m_perceivedrisk3.reverse = as.numeric(reverse.code(-1, m_perceivedrisk3))) %>%
+  mutate(wc_perceivedrisk3.reverse = as.numeric(reverse.code(-1, wc_perceivedrisk3))) %>%
+  mutate(s_perceivedrisk3.reverse = as.numeric(reverse.code(-1, s_perceivedrisk3)))
+
+#Alpha for Perceived Risk Index: Nine Items
+alpha_pr= cbind(d$m_perceivedrisk1, d$m_perceivedrisk2, d$m_perceivedrisk3.reverse, d$wc_perceivedrisk1, d$wc_perceivedrisk2, d$wc_perceivedrisk3.reverse, d$s_perceivedrisk1, d$s_perceivedrisk2, d$s_perceivedrisk3.reverse)
+alpha1 = ICC(alpha_pr, missing=F)[[1]]$ICC[6]
+
+#Alpha for Risk Index: Three Items
+alpha_r= cbind(d$m_risk, d$wc_risk, d$s_risk)
+alpha2 = ICC(alpha_r, missing=F)[[1]]$ICC[6]
+
+#Create new variables
+d <- d %>%
+  mutate(m_perceivedrisk = (m_perceivedrisk1 + m_perceivedrisk2 + m_perceivedrisk3.reverse)/3) %>%
+  mutate(wc_perceivedrisk = (wc_perceivedrisk1 + wc_perceivedrisk2 + wc_perceivedrisk3.reverse)/3) %>%
+  mutate(s_perceivedrisk = (s_perceivedrisk1 + s_perceivedrisk2 + s_perceivedrisk3.reverse)/3) %>%
+  mutate(likelihood_pr = (m_perceivedrisk1 + wc_perceivedrisk1 + s_perceivedrisk1)/3) %>%
+  mutate(seriousness_pr = (m_perceivedrisk2 + wc_perceivedrisk2 + s_perceivedrisk2)/3) %>%
+  mutate(cope_pr = (m_perceivedrisk3.reverse + wc_perceivedrisk3.reverse + s_perceivedrisk3.reverse)/3) %>%
+  mutate(perceivedriskindex = (m_perceivedrisk + wc_perceivedrisk + s_perceivedrisk)/3) %>%
+  mutate(riskindex = (m_risk + wc_risk + s_risk)/3)
+
+#Dataframe with Exclusions
+#Reverse code "cope" variable
+d.time <- d.time %>%
+  mutate(m_perceivedrisk3.reverse = as.numeric(reverse.code(-1, m_perceivedrisk3))) %>%
+  mutate(wc_perceivedrisk3.reverse = as.numeric(reverse.code(-1, wc_perceivedrisk3))) %>%
+  mutate(s_perceivedrisk3.reverse = as.numeric(reverse.code(-1, s_perceivedrisk3)))
+
+#Alpha for Perceived Risk Index: Nine Items
+alpha_pr2= cbind(d.time$m_perceivedrisk1, d.time$m_perceivedrisk2, d.time$m_perceivedrisk3.reverse, d.time$wc_perceivedrisk1, d.time$wc_perceivedrisk2, d.time$wc_perceivedrisk3.reverse, d.time$s_perceivedrisk1, d.time$s_perceivedrisk2, d.time$s_perceivedrisk3.reverse)
+alpha3 = ICC(alpha_pr2, missing=F)[[1]]$ICC[6]
+
+#Alpha for Risk Index: Three Items
+alpha_r2= cbind(d.time$m_risk, d.time$wc_risk, d.time$s_risk)
+alpha4 = ICC(alpha_r2, missing=F)[[1]]$ICC[6]
+
+#Create new variables
+d.time <- d.time %>%
+  mutate(m_perceivedrisk = (m_perceivedrisk1 + m_perceivedrisk2 + m_perceivedrisk3.reverse)/3) %>%
+  mutate(wc_perceivedrisk = (wc_perceivedrisk1 + wc_perceivedrisk2 + wc_perceivedrisk3.reverse)/3) %>%
+  mutate(s_perceivedrisk = (s_perceivedrisk1 + s_perceivedrisk2 + s_perceivedrisk3.reverse)/3) %>%
+  mutate(likelihood_pr = (m_perceivedrisk1 + wc_perceivedrisk1 + s_perceivedrisk1)/3) %>%
+  mutate(seriousness_pr = (m_perceivedrisk2 + wc_perceivedrisk2 + s_perceivedrisk2)/3) %>%
+  mutate(cope_pr = (m_perceivedrisk3.reverse + wc_perceivedrisk3.reverse + s_perceivedrisk3.reverse)/3) %>%
+  mutate(perceivedriskindex = (m_perceivedrisk + wc_perceivedrisk + s_perceivedrisk)/3) %>%
+  mutate(riskindex = (m_risk + wc_risk + s_risk)/3)
+```
+
+```{r Mediation_Visualize, warning=FALSE, message=FALSE}
+#Visualize
+
+#Full dataframe
+#Histograms
+#Risk
+qplot(riskindex, data = d, binwidth=1) + theme_bw() + xlim(0,7)
+#Risk by Condition
+qplot(riskindex, data = d, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
+#Pereived Risk
+qplot(perceivedriskindex, data = d, binwidth=1) + theme_bw() + xlim(0,7)
+#Perceived Risk by Condition
+qplot(perceivedriskindex, data = d, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
+
+#Graphs
+ms3 <- d %>% 
+  group_by(condition) %>% 
+  summarise("mean.risk" = mean(riskindex),
+            "sem.risk" = sem(riskindex),
+            "ci.lower.risk" = mean(riskindex) - ci95(riskindex),
+            "ci.upper.risk" = mean(riskindex) + ci95(riskindex),
+            "mean.perceivedrisk" = mean(perceivedriskindex),
+            "sem.perceivedrisk" = sem(perceivedriskindex),
+            "ci.lower.perceivedrisk" = mean(perceivedriskindex) - ci95(perceivedriskindex),
+            "ci.upper.perceivedrisk" = mean(perceivedriskindex) + ci95(perceivedriskindex))
+
+#Risk
+ggplot(ms3, aes(x = condition, y=mean.risk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.risk-sem.risk, 
+                     ymax = mean.risk+sem.risk)) +
+  theme_bw() +
+  ylim(0,7)
+
+#Perceived Risk
+ggplot(ms3, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
+                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
+  theme_bw() +
+  ylim(0,7)
+
+#Dataframe with exclusions
+#Histograms
+#Risk
+qplot(riskindex, data = d.time, binwidth=1) + theme_bw() + xlim(0,7)
+#Risk by Condition
+qplot(riskindex, data = d.time, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
+#Pereived Risk
+qplot(perceivedriskindex, data = d.time, binwidth=1) + theme_bw() + xlim(0,7)
+#Perceived Risk by Condition
+qplot(perceivedriskindex, data = d.time, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
+
+#Graphs
+ms4 <- d.time %>% 
+  group_by(condition) %>% 
+  summarise("mean.risk" = mean(riskindex),
+            "sem.risk" = sem(riskindex),
+            "ci.lower.risk" = mean(riskindex) - ci95(riskindex),
+            "ci.upper.risk" = mean(riskindex) + ci95(riskindex),
+            "mean.perceivedrisk" = mean(perceivedriskindex),
+            "sem.perceivedrisk" = sem(perceivedriskindex),
+            "ci.lower.perceivedrisk" = mean(perceivedriskindex) - ci95(perceivedriskindex),
+            "ci.upper.perceivedrisk" = mean(perceivedriskindex) + ci95(perceivedriskindex))
+
+#Risk
+ggplot(ms4, aes(x = condition, y=mean.risk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.risk-sem.risk, 
+                     ymax = mean.risk+sem.risk)) +
+  theme_bw() +
+  ylim(0,7)
+
+#Perceived Risk
+ggplot(ms4, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
+                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
+  theme_bw() +
+  ylim(0,7)
+```
+
+```{r Mediation_Analysis_Sobelfunction, warning=FALSE, message=FALSE, echo=FALSE}
+#Function for printing cleaner output from sobel
+sob_print <- function(sob){
+ df <- do.call(rbind, sob)
+ rnames <- rownames(df)
+ rnames[c(1,3,6)] <- c("Mod1: Y~X", "Mod2: Y~X+M", "Mod3: M~X")
+ rownames(df) <- rnames
+ 
+ return(list("Models"=df[1:7,],
+             "Vals"=data.frame("IndirectEffect"=df[8,1],
+                               "SE"=df[9,1],
+                               "Z"=df[10,1],
+                               "N"=df[11,1])))
+}
+```
+
+```{r Mediation_Analysis, warning=FALSE, message=FALSE}
+#Mediation Analysis
+
+#Full Dataframe
+#Sobel
+sobel = sobel(d$condition, d$perceivedriskindex, d$riskindex)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$perceivedriskindex, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Dataframe with Exclusions
+#Sobel
+sobel = sobel(d.time$condition, d.time$perceivedriskindex, d.time$riskindex) 
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$perceivedriskindex, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+```
+
+**Additional Analysis: Mediation for each scenario**
+```{r Mediation_EachScenario, message=FALSE, warning=FALSE}
+#Full Dataframe
+#Scenario 1: Motorcycle
+#Sobel
+sobel = sobel(d$condition, d$m_perceivedrisk, d$m_risk)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$m_perceivedrisk, dv = d$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Scenario 2: Wilderness Camping
+#Sobel
+sobel = sobel(d$condition, d$wc_perceivedrisk, d$wc_risk)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$wc_perceivedrisk, dv = d$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Scenario 3: Skiing
+#Sobel
+sobel = sobel(d$condition, d$s_perceivedrisk, d$s_risk)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$s_perceivedrisk, dv = d$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+
+#Dataframe with Exclusions
+#Scenario 1: Motorcycle
+#Sobel
+sobel = sobel(d.time$condition, d.time$m_perceivedrisk, d.time$m_risk) 
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$m_perceivedrisk, dv = d.time$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Scenario 2: Wilderness Camping
+#Sobel
+sobel = sobel(d.time$condition, d.time$wc_perceivedrisk, d.time$wc_risk) 
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$wc_perceivedrisk, dv = d.time$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Scenario 3: Skiing
+#Sobel
+sobel = sobel(d.time$condition, d.time$s_perceivedrisk, d.time$s_risk) 
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$s_perceivedrisk, dv = d.time$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+```
+
+**Additional Analysis: Mediation for each perceived risk item**
+```{r Mediation_EachPRItem, message=FALSE, warning=FALSE}
+#Full Dataframe
+#Likelihood
+#Sobel
+sobel = sobel(d$condition, d$likelihood_pr, d$riskindex)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$likelihood_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Seriousness
+#Sobel
+sobel = sobel(d$condition, d$seriousness_pr, d$riskindex)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$seriousness_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Coping
+#Sobel
+sobel = sobel(d$condition, d$cope_pr, d$riskindex)
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d$condition), mediator = d$cope_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+
+#Dataframe with Exclusions
+#Likelihood
+#Sobel
+sobel = sobel(d.time$condition, d.time$likelihood_pr, d.time$riskindex) 
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$likelihood_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Seriousness
+#Sobel
+sobel = sobel(d.time$condition, d.time$seriousness_pr, d.time$riskindex) 
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$seriousness_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+
+#Coping
+#Sobel
+#Check to make sure this works when sample size is larger:
+sobel = sobel(d.time$condition, d.time$cope_pr, d.time$riskindex) 
+sobel_chart <- sob_print(sobel)
+kable(sobel_chart$Models)
+kable(sobel_chart$Vals)
+
+#Bootstrapping
+#Sample size currently too small:
+#mediation(x = as.numeric(d.time$condition), mediator = d.time$cope_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+```
+
+**Additional Analysis: Is there Moderation by God Belief?**
+```{r Moderation, message=FALSE, warning=FALSE}
+#Full dataframe
+#Summary
+table(d$condition, d$belief_god)
+ms_beliefgod <- d %>% 
+  group_by(belief_god, condition) %>% 
+  summarise("mean" = mean(riskindex),
+            "sd" = sd(riskindex))
+
+#Best model?
+model5 = lm(riskindex ~ condition, d)
+model6 = lm(riskindex ~ condition + belief_god, d)
+model7 = lm(riskindex ~ condition*belief_god, d)
+anova(model5, model6, model7)           
+
+#Effect of Condition for Non-believers
+#summary(lm(riskindex ~ condition, d[d$belief_god=="No",]))
+d.extra = d[d$belief_god=="No",]
+cohen.d(c(0,1), as.numeric(d.extra$condition))
+
+#Effect of Condition for Believers
+summary(lm(riskindex ~ condition, d[d$belief_god=="Yes",]))
+d.extra2 = d[d$belief_god=="Yes",]
+cohen.d(c(0,1), as.numeric(d.extra2$condition))
+
+#Dataframe with exclusions
+#Summary
+table(d.time$condition, d.time$belief_god)
+ms_beliefgod2 <- d.time %>% 
+  group_by(belief_god, condition) %>% 
+  summarise("mean" = mean(riskindex),
+            "sd" = sd(riskindex))
+
+#Best model?
+model8 = lm(riskindex ~ condition, d.time)
+model9 = lm(riskindex ~ condition + belief_god, d.time)
+model10 = lm(riskindex ~ condition*belief_god, d.time)
+anova(model8, model9, model10)           
+
+#Effect of Condition for Non-believers
+#summary(lm(riskindex ~ condition, d.time[d.time$belief_god=="No",]))
+d.extra3 = d.time[d.time$belief_god=="No",]
+cohen.d(c(0,1), as.numeric(d.extra3$condition))
+
+#Effect of Condition for Believers
+#summary(lm(riskindex ~ condition, d.time[d.time$belief_god=="Yes",]))
+d.extra4 = d.time[d.time$belief_god=="Yes",]
+cohen.d(c(0,1), as.numeric(d.extra4$condition))
+```
+

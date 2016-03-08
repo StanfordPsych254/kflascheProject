@@ -1,0 +1,91 @@
+{
+    "ApprovalTime": "2016-03-08T02:25:27Z",
+    "AutoApprovalTime": "2016-03-08T02:24:03Z",
+    "AssignmentId": "3R2UR8A0IAG3RBX5OKBXG0P1F84XOI",
+    "WorkerId": "ATHS9CW2FLYUY",
+    "answers": {
+        "data": {
+            "mlikelihood": [
+                "3"
+            ],
+            "wcserious": [
+                "4"
+            ],
+            "engl": [
+                "Yes"
+            ],
+            "wclikely": [
+                "2"
+            ],
+            "condition_god": [],
+            "mlikely": [
+                "1"
+            ],
+            "s_cope": [
+                "4"
+            ],
+            "studycheck": [
+                "I suppose they are about people's willingness to taking risks."
+            ],
+            "primetime": [
+                82.682
+            ],
+            "godbelief": [
+                "Yes"
+            ],
+            "control_thoughts": [
+                "Well, it's a pretty reasonable set of rules.  Makes sense to me!"
+            ],
+            "wccope": [
+                "5"
+            ],
+            "mserious": [
+                "6"
+            ],
+            "wclikelihood": [
+                "4"
+            ],
+            "previouscheck": [
+                "No"
+            ],
+            "mcope": [
+                "3"
+            ],
+            "sserious": [
+                "6"
+            ],
+            "slikelihood": [
+                "4"
+            ],
+            "control_attncheck": [
+                "According to the IAU, Pluto is not a proper planet."
+            ],
+            "gen": [
+                "Male"
+            ],
+            "condition_control": [
+                "5"
+            ],
+            "race_ethn": [
+                "white"
+            ],
+            "age": [
+                "30"
+            ],
+            "god_thoughts": [
+                ""
+            ],
+            "god_attncheck": [
+                ""
+            ],
+            "slikely": [
+                "1"
+            ]
+        }
+    },
+    "AcceptTime": "2016-03-08T01:26:55Z",
+    "HITId": "3N3WJQXELSQRXQTIX05B99VPXO22L0",
+    "Assignment": "",
+    "AssignmentStatus": "Approved",
+    "SubmitTime": "2016-03-08T02:19:03Z"
+}

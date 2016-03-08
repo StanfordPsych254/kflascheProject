@@ -1,0 +1,91 @@
+{
+    "ApprovalTime": "2016-03-08T02:45:27Z",
+    "AutoApprovalTime": "2016-03-08T02:43:29Z",
+    "AssignmentId": "3DY4FPOOA1OEKZKQGXRJMAXLALMRVQ",
+    "WorkerId": "A2HSCKH5NKN5LP",
+    "answers": {
+        "data": {
+            "mlikelihood": [
+                "3"
+            ],
+            "wcserious": [
+                "4"
+            ],
+            "engl": [
+                "Yes"
+            ],
+            "wclikely": [
+                "2"
+            ],
+            "condition_god": [
+                "4"
+            ],
+            "mlikely": [
+                "1"
+            ],
+            "s_cope": [
+                "1"
+            ],
+            "studycheck": [
+                "Basically asking our belief in something, while asking if we believe in chances of being hurt or something along those lines..no idea other than that."
+            ],
+            "primetime": [
+                11.581
+            ],
+            "godbelief": [
+                "No"
+            ],
+            "control_thoughts": [
+                ""
+            ],
+            "wccope": [
+                "7"
+            ],
+            "mserious": [
+                "7"
+            ],
+            "wclikelihood": [
+                "2"
+            ],
+            "previouscheck": [
+                "No"
+            ],
+            "mcope": [
+                "2"
+            ],
+            "sserious": [
+                "7"
+            ],
+            "slikelihood": [
+                "4"
+            ],
+            "control_attncheck": [
+                ""
+            ],
+            "gen": [
+                "Male"
+            ],
+            "condition_control": [],
+            "race_ethn": [
+                "white"
+            ],
+            "age": [
+                "29"
+            ],
+            "god_thoughts": [
+                "I personally think that no person could be omniscient, and omnibenevolent while bad things happen in the world.  It's impossible to me believe that something for instance like 9/11 was something god let fly, while he was being omnibenevolent."
+            ],
+            "god_attncheck": [
+                "Omniscient, Omnibenevolent.   Basically all the good attributes one person could have."
+            ],
+            "slikely": [
+                "1"
+            ]
+        }
+    },
+    "AcceptTime": "2016-03-08T02:32:54Z",
+    "HITId": "3N3WJQXELSQRXQTIX05B99VPXO22L0",
+    "Assignment": "",
+    "AssignmentStatus": "Approved",
+    "SubmitTime": "2016-03-08T02:38:29Z"
+}
