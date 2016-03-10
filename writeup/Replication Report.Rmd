@@ -1,7 +1,9 @@
 ---
 title: "Replication of Study 3 in “Anticipating divine protection? Reminders of god can increase nonmoral risk taking” by Kupor, D. M., Laurin, K., & Levav, J. (Psychological Science 26.4 (2015): 374-384)"
 author: "Katherine Flaschen (kflasche@stanford.edu)"
-output: html_document
+output: 
+  html_document:
+    toc: true
 ---
 
 ## Introduction
@@ -12,7 +14,7 @@ The supplemental material can be found here: http://pss.sagepub.com/content/supp
 
 ## Methods
 ### Power Analysis
-The original study reports that:
+The original study's **key result** was a mediation analysis, with willingness to take risks as the dependent variable, priming condition as the independent variable, and perceived risk as the mediating variable:
 
 a) Participants in the God condition reported a higher willingness to take risks, *b* = .61, *t*(99) = 2.29, *p* = .024, than did participants in the control condition.
 b) Participants in the God condition also perceived less danger associated with these risks, *b* = -0.44, *t*(99) = -2.97, *p* = .004, than did participants in the control condition.
@@ -25,8 +27,6 @@ b) *b* = -0.44, *t*(99) = -2.97, *p* = .004 (Cohen's d = .60)
 
 Then, I took the smaller of these two effect sizes, Cohen's d = .46, for my power analysis:
 ```{r Power Analysis}
-power.t.test(delta=0.46, sd=1, power=.95, sig.level=0.05)
-power.t.test(delta=0.46, sd=1, power=.90, sig.level=0.05)
 power.t.test(delta=0.46, sd=1, power=.80, sig.level=0.05)
 ```
 
@@ -172,14 +172,14 @@ d.raw$condition <- factor(ifelse(d.raw$god_thoughts=="", "Control", "God"))
 ```
 
 ### Actual Sample
-**Sample Size** 
+####Sample Size
 ```{r Sample Size, message=FALSE, warning=FALSE, echo=FALSE}
 #Number of participants
 numberofp = length(unique(d.raw$workerid))
 ```
 `r numberofp` participants were recruited for this experiment.
 
-**Exclusion Criteria and Demographics**
+####Exclusion Criteria and Demographics
 ```{r Exclusions and Demographics, message=FALSE, warning=FALSE, echo=FALSE}
 #Exclusion Criteria
 
@@ -224,22 +224,30 @@ As specified under d and e of the "Differences from Original Study" section, `r 
 This left a total of `r length(unique(d$workerid))` participants.  As specified in my analysis plan, I ran all analyses on these `r length(unique(d$workerid))` participants (mean age = `r mean(d$age)` years; `r percent(Male)` male, `r percent(Female)` female), as well as only on participants who spent at least 5 seconds reading the priming (God vs. control) excerpt, which represented `r length(unique(d.time$workerid))` participants (mean age = `r mean(d.time$age)` years; `r percent(Male2)` male, `r percent(Female2)` female).
 
 ### Confirmatory Analysis
-**Preliminary Analysis: Linear Mixed Models**
-```{r PrelimAnalysis, message=FALSE, warning=FALSE}
-#Full dataframe
+####Preliminary Analysis: Linear Mixed Models
+**All participants**
+```{r PrelimAnalysis1, message=FALSE, warning=FALSE}
 #Turn data into long form
 d.gathered <- d %>%
+  dplyr::rename(motorcycle_perceivedrisk1 = m_perceivedrisk1,
+         motorcycle_perceivedrisk2 = m_perceivedrisk2,          
+         motorcycle_perceivedrisk3 = m_perceivedrisk3,
+         motorcycle_risk = m_risk,
+         wildernesscamping_perceivedrisk1 = wc_perceivedrisk1,
+         wildernesscamping_perceivedrisk2 = wc_perceivedrisk2,          
+         wildernesscamping_perceivedrisk3 = wc_perceivedrisk3,
+         wildernesscamping_risk = wc_risk,
+         skiing_perceivedrisk1 = s_perceivedrisk1,
+         skiing_perceivedrisk2 = s_perceivedrisk2,          
+         skiing_perceivedrisk3 = s_perceivedrisk3,
+         skiing_risk = s_risk) %>%
   gather(scenario, rating, 
-         starts_with("m_"), starts_with("wc_"), starts_with("s_")) %>%
+         starts_with("motorcycle_"), starts_with("wildernesscamping_"), starts_with("skiing_")) %>%
   separate(scenario, c("scenario", "risk"), "_") %>%
   spread(risk, rating)
 
-#Visualize: Histograms
-#Risk-taking
-qplot(risk, data = d.gathered, binwidth=1) + theme_bw() + xlim(0,7)
-#Is there an effect of condition on risk-taking?
-qplot(risk, data = d.gathered, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
-#Does scenario moderate the effect of condition on risk-taking?
+#Histogram
+#Risk-taking by scenario and condition
 qplot(risk, data = d.gathered, facets=condition~scenario, binwidth=1) + theme_bw() + xlim(0,7)
 
 #Analysis
@@ -250,35 +258,45 @@ summary(model2)
 anova(model1, model2, refit = FALSE)
 
 #Graph
-ms1 <- d.gathered %>% 
+ms_LMEM_AllParticipants <- d.gathered %>% 
   group_by(condition, scenario) %>% 
   summarise("mean.risk" = mean(risk),
             "sem" = sem(risk),
             "ci.lower" = mean(risk) - ci95(risk),
             "ci.upper" = mean(risk) + ci95(risk))
 
-ggplot(ms1, aes(x = condition, y=mean.risk, fill=condition)) +
+ggplot(ms_LMEM_AllParticipants, aes(x = condition, y=mean.risk, fill=condition)) +
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin = mean.risk-sem, 
                      ymax = mean.risk+sem)) +
   facet_wrap(~scenario) +
   theme_bw() +
-  ylim(0,7)
+  ylim(0,7) 
+```
 
-#Dataframe with exclusions
+**Participants who spent at least 5 seconds reading the prime**
+```{r PrelimAnalysis2, message=FALSE, warning=FALSE}
 #Turn data into long form
 d.gathered.time <- d.time %>%
+  dplyr::rename(motorcycle_perceivedrisk1 = m_perceivedrisk1,
+         motorcycle_perceivedrisk2 = m_perceivedrisk2,          
+         motorcycle_perceivedrisk3 = m_perceivedrisk3,
+         motorcycle_risk = m_risk,
+         wildernesscamping_perceivedrisk1 = wc_perceivedrisk1,
+         wildernesscamping_perceivedrisk2 = wc_perceivedrisk2,          
+         wildernesscamping_perceivedrisk3 = wc_perceivedrisk3,
+         wildernesscamping_risk = wc_risk,
+         skiing_perceivedrisk1 = s_perceivedrisk1,
+         skiing_perceivedrisk2 = s_perceivedrisk2,          
+         skiing_perceivedrisk3 = s_perceivedrisk3,
+         skiing_risk = s_risk) %>%
   gather(scenario, rating, 
-         starts_with("m_"), starts_with("wc_"), starts_with("s_")) %>%
+         starts_with("motorcycle_"), starts_with("wildernesscamping_"), starts_with("skiing_")) %>%
   separate(scenario, c("scenario", "risk"), "_") %>%
   spread(risk, rating)
 
-#Visualize: Histograms
-#Risk-taking
-qplot(risk, data = d.gathered.time, binwidth=1) + theme_bw() + xlim(0,7)
-#Is there an effect of condition on risk-taking?
-qplot(risk, data = d.gathered.time, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
-#Does scenario moderate the effect of condition on risk-taking?
+#Histogram
+#Risk-taking by scenario and condition
 qplot(risk, data = d.gathered.time, facets=condition~scenario, binwidth=1) + theme_bw() + xlim(0,7)
 
 #Analysis
@@ -289,14 +307,14 @@ summary(model4)
 anova(model3, model4, refit = FALSE)
 
 #Graph
-ms2 <- d.gathered.time %>% 
+ms_LMEM_TimeExclusion <- d.gathered.time %>% 
   group_by(condition, scenario) %>% 
   summarise("mean.risk" = mean(risk),
             "sem" = sem(risk),
             "ci.lower" = mean(risk) - ci95(risk),
             "ci.upper" = mean(risk) + ci95(risk))
 
-ggplot(ms2, aes(x = condition, y=mean.risk, fill=condition)) +
+ggplot(ms_LMEM_TimeExclusion, aes(x = condition, y=mean.risk, fill=condition)) +
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin = mean.risk-sem, 
                      ymax = mean.risk+sem)) +
@@ -305,11 +323,12 @@ ggplot(ms2, aes(x = condition, y=mean.risk, fill=condition)) +
   ylim(0,7)
 ```
 
-**Main Analysis: Mediation**
+
+####Main Analysis: Mediation (KEY RESULT)
 ```{r Mediation_DataSetup, message=FALSE, warning=FALSE, echo=FALSE}
 #Data Setup
 
-#Full Dataframe
+#All Participants
 #Reverse code "cope" variable
 d <- d %>%
   mutate(m_perceivedrisk3.reverse = as.numeric(reverse.code(-1, m_perceivedrisk3))) %>%
@@ -335,7 +354,7 @@ d <- d %>%
   mutate(perceivedriskindex = (m_perceivedrisk + wc_perceivedrisk + s_perceivedrisk)/3) %>%
   mutate(riskindex = (m_risk + wc_risk + s_risk)/3)
 
-#Dataframe with Exclusions
+#Participants who spend at least 5 seconds reading prime
 #Reverse code "cope" variable
 d.time <- d.time %>%
   mutate(m_perceivedrisk3.reverse = as.numeric(reverse.code(-1, m_perceivedrisk3))) %>%
@@ -362,89 +381,7 @@ d.time <- d.time %>%
   mutate(riskindex = (m_risk + wc_risk + s_risk)/3)
 ```
 
-```{r Mediation_Visualize, warning=FALSE, message=FALSE}
-#Visualize
-
-#Full dataframe
-#Histograms
-#Risk
-qplot(riskindex, data = d, binwidth=1) + theme_bw() + xlim(0,7)
-#Risk by Condition
-qplot(riskindex, data = d, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
-#Pereived Risk
-qplot(perceivedriskindex, data = d, binwidth=1) + theme_bw() + xlim(0,7)
-#Perceived Risk by Condition
-qplot(perceivedriskindex, data = d, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
-
-#Graphs
-ms3 <- d %>% 
-  group_by(condition) %>% 
-  summarise("mean.risk" = mean(riskindex),
-            "sem.risk" = sem(riskindex),
-            "ci.lower.risk" = mean(riskindex) - ci95(riskindex),
-            "ci.upper.risk" = mean(riskindex) + ci95(riskindex),
-            "mean.perceivedrisk" = mean(perceivedriskindex),
-            "sem.perceivedrisk" = sem(perceivedriskindex),
-            "ci.lower.perceivedrisk" = mean(perceivedriskindex) - ci95(perceivedriskindex),
-            "ci.upper.perceivedrisk" = mean(perceivedriskindex) + ci95(perceivedriskindex))
-
-#Risk
-ggplot(ms3, aes(x = condition, y=mean.risk, fill=condition)) +
-  geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin = mean.risk-sem.risk, 
-                     ymax = mean.risk+sem.risk)) +
-  theme_bw() +
-  ylim(0,7)
-
-#Perceived Risk
-ggplot(ms3, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
-  geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
-                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
-  theme_bw() +
-  ylim(0,7)
-
-#Dataframe with exclusions
-#Histograms
-#Risk
-qplot(riskindex, data = d.time, binwidth=1) + theme_bw() + xlim(0,7)
-#Risk by Condition
-qplot(riskindex, data = d.time, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
-#Pereived Risk
-qplot(perceivedriskindex, data = d.time, binwidth=1) + theme_bw() + xlim(0,7)
-#Perceived Risk by Condition
-qplot(perceivedriskindex, data = d.time, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7)
-
-#Graphs
-ms4 <- d.time %>% 
-  group_by(condition) %>% 
-  summarise("mean.risk" = mean(riskindex),
-            "sem.risk" = sem(riskindex),
-            "ci.lower.risk" = mean(riskindex) - ci95(riskindex),
-            "ci.upper.risk" = mean(riskindex) + ci95(riskindex),
-            "mean.perceivedrisk" = mean(perceivedriskindex),
-            "sem.perceivedrisk" = sem(perceivedriskindex),
-            "ci.lower.perceivedrisk" = mean(perceivedriskindex) - ci95(perceivedriskindex),
-            "ci.upper.perceivedrisk" = mean(perceivedriskindex) + ci95(perceivedriskindex))
-
-#Risk
-ggplot(ms4, aes(x = condition, y=mean.risk, fill=condition)) +
-  geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin = mean.risk-sem.risk, 
-                     ymax = mean.risk+sem.risk)) +
-  theme_bw() +
-  ylim(0,7)
-
-#Perceived Risk
-ggplot(ms4, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
-  geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
-                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
-  theme_bw() +
-  ylim(0,7)
-```
-
-```{r Mediation_Analysis_Sobelfunction, warning=FALSE, message=FALSE, echo=FALSE}
+```{r Mediation_Sobelfunction, warning=FALSE, message=FALSE, echo=FALSE}
 #Function for printing cleaner output from sobel
 sob_print <- function(sob){
  df <- do.call(rbind, sob)
@@ -460,10 +397,48 @@ sob_print <- function(sob){
 }
 ```
 
-```{r Mediation_Analysis, warning=FALSE, message=FALSE}
-#Mediation Analysis
+**All participants**
+```{r Mediation_Graphs1, warning=FALSE, message=FALSE}
+#Histograms
+#Risk by Condition
+qplot(riskindex, data = d, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7) + ggtitle("Willigness to Take Risks by Condition")
 
-#Full Dataframe
+#Perceived Risk by Condition
+qplot(perceivedriskindex, data = d, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7) + ggtitle("Perceived Risk by Condition")
+
+#Graphs
+ms_MainMediation_AllParticipants <- d %>% 
+  group_by(condition) %>% 
+  summarise("mean.risk" = mean(riskindex),
+            "sem.risk" = sem(riskindex),
+            "ci.lower.risk" = mean(riskindex) - ci95(riskindex),
+            "ci.upper.risk" = mean(riskindex) + ci95(riskindex),
+            "mean.perceivedrisk" = mean(perceivedriskindex),
+            "sem.perceivedrisk" = sem(perceivedriskindex),
+            "ci.lower.perceivedrisk" = mean(perceivedriskindex) - ci95(perceivedriskindex),
+            "ci.upper.perceivedrisk" = mean(perceivedriskindex) + ci95(perceivedriskindex))
+
+#Risk
+ggplot(ms_MainMediation_AllParticipants, aes(x = condition, y=mean.risk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.risk-sem.risk, 
+                     ymax = mean.risk+sem.risk)) +
+  theme_bw() +
+  ylim(0,7) + 
+  ggtitle("Willigness to Take Risks by Condition")
+
+#Perceived Risk
+ggplot(ms_MainMediation_AllParticipants, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
+                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
+  theme_bw() +
+  ylim(0,7) + 
+  ggtitle("Perceived Risk by Condition")
+```
+
+<br>**KEY RESULT**
+```{r Mediation_Analysis1, warning=FALSE, message=FALSE}
 #Sobel
 sobel = sobel(d$condition, d$perceivedriskindex, d$riskindex)
 sobel_chart <- sob_print(sobel)
@@ -473,8 +448,50 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d$condition), mediator = d$perceivedriskindex, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+```
+<br>
+**Participants who spent at least 5 seconds reading the prime**
+```{r Mediation_Graphs2, warning=FALSE, message=FALSE}
+#Histograms
+#Risk by Condition
+qplot(riskindex, data = d.time, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7) + ggtitle("Willigness to Take Risks by Condition")
 
-#Dataframe with Exclusions
+#Perceived Risk by Condition
+qplot(perceivedriskindex, data = d.time, facets=~condition, binwidth=1) + theme_bw() + xlim(0,7) + ggtitle("Perceived Risk by Condition")
+
+#Graphs
+ms_MainMediation_TimeExclusion <- d.time %>% 
+  group_by(condition) %>% 
+  summarise("mean.risk" = mean(riskindex),
+            "sem.risk" = sem(riskindex),
+            "ci.lower.risk" = mean(riskindex) - ci95(riskindex),
+            "ci.upper.risk" = mean(riskindex) + ci95(riskindex),
+            "mean.perceivedrisk" = mean(perceivedriskindex),
+            "sem.perceivedrisk" = sem(perceivedriskindex),
+            "ci.lower.perceivedrisk" = mean(perceivedriskindex) - ci95(perceivedriskindex),
+            "ci.upper.perceivedrisk" = mean(perceivedriskindex) + ci95(perceivedriskindex))
+
+#Risk
+ggplot(ms_MainMediation_TimeExclusion, aes(x = condition, y=mean.risk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.risk-sem.risk, 
+                     ymax = mean.risk+sem.risk)) +
+  theme_bw() +
+  ylim(0,7) + 
+  ggtitle("Willigness to Take Risks by Condition")
+
+#Perceived Risk
+ggplot(ms_MainMediation_TimeExclusion, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
+                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
+  theme_bw() +
+  ylim(0,7) + 
+  ggtitle("Perceived Risk by Condition")
+```
+
+<br>**KEY RESULT**
+```{r Mediation_Analysis2, warning=FALSE, message=FALSE}
 #Sobel
 sobel = sobel(d.time$condition, d.time$perceivedriskindex, d.time$riskindex) 
 sobel_chart <- sob_print(sobel)
@@ -485,11 +502,12 @@ kable(sobel_chart$Vals)
 #Sample size currently too small:
 #mediation(x = as.numeric(d.time$condition), mediator = d.time$perceivedriskindex, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
+<br>
 
-**Additional Analysis: Mediation for each scenario**
-```{r Mediation_EachScenario, message=FALSE, warning=FALSE}
-#Full Dataframe
-#Scenario 1: Motorcycle
+####Additional Analysis: Mediation for each scenario 
+**All participants**
+<br>**Scenario 1: Motorcycle**
+```{r Mediation_Motorcycle1, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d$condition, d$m_perceivedrisk, d$m_risk)
 sobel_chart <- sob_print(sobel)
@@ -499,8 +517,10 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d$condition), mediator = d$m_perceivedrisk, dv = d$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
-
-#Scenario 2: Wilderness Camping
+```
+<br>
+**Scenario 2: Wilderness Camping**
+```{r Mediation_WildernessCamping1, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d$condition, d$wc_perceivedrisk, d$wc_risk)
 sobel_chart <- sob_print(sobel)
@@ -510,8 +530,10 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d$condition), mediator = d$wc_perceivedrisk, dv = d$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
-
-#Scenario 3: Skiing
+```
+<br>
+**Scenario 3: Skiing**
+```{r Mediation_Skiing1, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d$condition, d$s_perceivedrisk, d$s_risk)
 sobel_chart <- sob_print(sobel)
@@ -521,10 +543,11 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d$condition), mediator = d$s_perceivedrisk, dv = d$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
-
-
-#Dataframe with Exclusions
-#Scenario 1: Motorcycle
+```
+<br>
+**Participants who spent at least 5 seconds reading the prime**
+<br>**Scenario 1: Motorcycle**
+```{r Mediation_Motorcycle2, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d.time$condition, d.time$m_perceivedrisk, d.time$m_risk) 
 sobel_chart <- sob_print(sobel)
@@ -534,8 +557,10 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d.time$condition), mediator = d.time$m_perceivedrisk, dv = d.time$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
-
-#Scenario 2: Wilderness Camping
+```
+<br>
+**Scenario 2: Wilderness Camping**
+```{r Mediation_WildernessCamping2, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d.time$condition, d.time$wc_perceivedrisk, d.time$wc_risk) 
 sobel_chart <- sob_print(sobel)
@@ -545,8 +570,10 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d.time$condition), mediator = d.time$wc_perceivedrisk, dv = d.time$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
-
-#Scenario 3: Skiing
+```
+<br>
+**Scenario 3: Skiing**
+```{r Mediation_Skiing2, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d.time$condition, d.time$s_perceivedrisk, d.time$s_risk) 
 sobel_chart <- sob_print(sobel)
@@ -557,11 +584,12 @@ kable(sobel_chart$Vals)
 #Sample size currently too small:
 #mediation(x = as.numeric(d.time$condition), mediator = d.time$s_perceivedrisk, dv = d.time$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
+<br>
 
-**Additional Analysis: Mediation for each perceived risk item**
-```{r Mediation_EachPRItem, message=FALSE, warning=FALSE}
-#Full Dataframe
-#Likelihood
+####Additional Analysis: Mediation for each perceived risk item
+**All participants**
+<br>**Perceived Risk Item: Likelihood**
+```{r Mediation_Likelihood1, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d$condition, d$likelihood_pr, d$riskindex)
 sobel_chart <- sob_print(sobel)
@@ -571,8 +599,10 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d$condition), mediator = d$likelihood_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+```
 
-#Seriousness
+<br>**Perceived Risk Item: Seriousness**
+```{r Mediation_Seriousness1, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d$condition, d$seriousness_pr, d$riskindex)
 sobel_chart <- sob_print(sobel)
@@ -582,8 +612,10 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d$condition), mediator = d$seriousness_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+```
 
-#Coping
+<br>**Perceived Risk Item: Coping**
+```{r Mediation_Coping1, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d$condition, d$cope_pr, d$riskindex)
 sobel_chart <- sob_print(sobel)
@@ -593,10 +625,11 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d$condition), mediator = d$cope_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
-
-
-#Dataframe with Exclusions
-#Likelihood
+```
+<br>
+**Participants who spent at least 5 seconds reading the prime**
+<br>**Perceived Risk Item: Likelihood**
+```{r Mediation_Likelihood2, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d.time$condition, d.time$likelihood_pr, d.time$riskindex) 
 sobel_chart <- sob_print(sobel)
@@ -606,8 +639,10 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d.time$condition), mediator = d.time$likelihood_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+```
 
-#Seriousness
+<br>**Perceived Risk Item: Seriousness**
+```{r Mediation_Seriousness2, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d.time$condition, d.time$seriousness_pr, d.time$riskindex) 
 sobel_chart <- sob_print(sobel)
@@ -617,8 +652,10 @@ kable(sobel_chart$Vals)
 #Bootstrapping
 #Sample size currently too small:
 #mediation(x = as.numeric(d.time$condition), mediator = d.time$seriousness_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+```
 
-#Coping
+<br>**Perceived Risk Item: Coping**
+```{r Mediation_Coping2, message=FALSE, warning=FALSE}
 #Sobel
 sobel = sobel(d.time$condition, d.time$cope_pr, d.time$riskindex) 
 sobel_chart <- sob_print(sobel)
@@ -629,10 +666,11 @@ kable(sobel_chart$Vals)
 #Sample size currently too small:
 #mediation(x = as.numeric(d.time$condition), mediator = d.time$cope_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
+<br>
 
-**Additional Analysis: Is there Moderation by God Belief?**
-```{r Moderation, message=FALSE, warning=FALSE}
-#Full dataframe
+####Additional Analysis: Is there Moderation by God Belief?
+**All participants**
+```{r Moderation1, message=FALSE, warning=FALSE}
 #Summary
 table(d$condition, d$belief_god)
 ms_beliefgod <- d %>% 
@@ -655,8 +693,10 @@ cohen.d(c(0,1), as.numeric(d.extra$condition))
 summary(lm(riskindex ~ condition, d[d$belief_god=="Yes",]))
 d.extra2 = d[d$belief_god=="Yes",]
 cohen.d(c(0,1), as.numeric(d.extra2$condition))
+```
 
-#Dataframe with exclusions
+<br>**Participants who spent at least 5 seconds reading the prime**
+```{r Moderation2, message=FALSE, warning=FALSE}
 #Summary
 table(d.time$condition, d.time$belief_god)
 ms_beliefgod2 <- d.time %>% 
