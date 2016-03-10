@@ -4,10 +4,11 @@ author: "Katherine Flaschen (kflasche@stanford.edu)"
 output: 
   html_document:
     toc: true
+    toc_depth: 3
 ---
 
 ## Introduction
-In this study, Kupor, Laurin, and Levav (2015) demonstrated that priming God increased people’s willingness to take nonmoral risks.  Further, they showed that this effect was mediated by perceived risk.  Specifically, reminders of God (as opposed to a control condition) led individuals to perceive nonmoral risk as less dangerous, which in turn led to an increased willingness to take such risk.  The authors suggested that reminders of God led to less perceived risk because such reminders evoked a feeling of safety from potential harm, although this was tested more directly in a subsequent study.
+Kupor, Laurin, and Levav (2015) demonstrated that priming God increased people’s willingness to take nonmoral risks.  Further, they showed that this effect was mediated by perceived risk.  Specifically, reminders of God (as opposed to a control condition) led individuals to perceive nonmoral risk as less dangerous, which in turn led to an increased willingness to take such risk.  The authors suggested that reminders of God led to less perceived risk because such reminders evoked a feeling of safety from potential harm, although this was tested more directly in a subsequent study.
 
 The original paper can be found here: <br> http://pss.sagepub.com/content/26/4/374.full.pdf <br>
 The supplemental material can be found here: http://pss.sagepub.com/content/suppl/2015/02/25/0956797614563108.DC1/DS_10.11770956797614563108.pdf
@@ -324,7 +325,7 @@ ggplot(ms_LMEM_TimeExclusion, aes(x = condition, y=mean.risk, fill=condition)) +
 ```
 
 
-####Main Analysis: Mediation (KEY RESULT)
+####Main Analysis: Mediation
 ```{r Mediation_DataSetup, message=FALSE, warning=FALSE, echo=FALSE}
 #Data Setup
 
@@ -437,7 +438,7 @@ ggplot(ms_MainMediation_AllParticipants, aes(x = condition, y=mean.perceivedrisk
   ggtitle("Perceived Risk by Condition")
 ```
 
-<br>**KEY RESULT**
+<br>**KEY RESULT TO BE REPLICATED**
 ```{r Mediation_Analysis1, warning=FALSE, message=FALSE}
 #Sobel
 sobel = sobel(d$condition, d$perceivedriskindex, d$riskindex)
@@ -490,7 +491,6 @@ ggplot(ms_MainMediation_TimeExclusion, aes(x = condition, y=mean.perceivedrisk, 
   ggtitle("Perceived Risk by Condition")
 ```
 
-<br>**KEY RESULT**
 ```{r Mediation_Analysis2, warning=FALSE, message=FALSE}
 #Sobel
 sobel = sobel(d.time$condition, d.time$perceivedriskindex, d.time$riskindex) 
