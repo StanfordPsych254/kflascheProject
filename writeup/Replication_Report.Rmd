@@ -75,7 +75,7 @@ Next, like the original authors, I will run a mediation analysis as my **main an
 
 Additionally, as the authors included in their Supplemental Material, I will run the above mediation analysis three additional times, treating each item in the perceived risk index individually as the mediating variable. The authors found that, "A mediation comparison analysis (Hayes, 2013) revealed no significant differences between the indirect effects. Specifically, the analysis revealed no difference between the coping ability and the seriousness of negative consequences indirect effects (CI: -.5741 to .0569), no difference between the likelihood of negative consequences and coping ability indirect effects (CI: -.5720 to .0052), and no difference between the likelihood of negative consequences and seriousness of negative consequences indirect effects (CI: -.2844 to .1239)."
 
-Finally, as the authors depicted in their Supplemental Material, I will use participants' response to the question, "Do you believe in God?" ("yes" or "no"), asked at the end of the study, to determine if belief in God moderates the effect of condition on willingness to take risks.  The authors found that belief in God did not moderate the effect of condition on risk taking (believers: *t*(66) = 1.54, *p* = .128, *d* = .37; non-believers: *t*(30) = 1.69, *p* = .102, *d* = .62).
+Finally, as the authors depicted in their Supplemental Material, I will use participants' response to the question, "Do you believe in God?" ("yes" or "no"), asked at the end of the study, to determine if belief in God moderates the effect of condition on willingness to take risks.  The authors found that belief in God did not moderate the effect of condition on risk taking (believers: *t*(66) = 1.54, *p* = .128; non-believers: *t*(30) = 1.69, *p* = .102).
 
 ### Differences from Original Study
 Given that the original study was run on MTurk and that I have all the exact materials from the original study, I anticipate few significant differences from the original study.  The differences I do anticipate are listed below:
@@ -90,7 +90,7 @@ g) Although the original authors did not do this, I will run my analyses both on
 
 ## (Post Data Collection) Methods Addendum
 ### Differences from pre-data collection methods plan
-TO BE COMPLETED.
+None.
 
 ## Results
 ### Data prep
@@ -146,12 +146,16 @@ for (f in files) {
                    gender = jd$answers$data$gen,
                    age = as.numeric(jd$answers$data$age),
                    race = jd$answers$data$race_ethn,
-                   english = jd$answers$data$engl,
+                   english = ifelse(is.null(unlist(jd$answers$data$engl)), NA,
+                         unlist(jd$answers$data$engl)),
                    check_seen = jd$answers$data$previouscheck,
                    check_hypothesis = jd$answers$data$studycheck,
                    stringsAsFactors=FALSE)
   d.raw <- bind_rows(d.raw, id)
 }
+
+#Remove duplicates
+d.raw = d.raw[!duplicated(d.raw$workerid), ]
 ```
 
 ```{r Data cleanup, message=FALSE, warning=FALSE}
@@ -222,7 +226,7 @@ Other2 = sum(d.time$gender=="Other")/length(d.time$gender)
 ```
 As specified under d and e of the "Differences from Original Study" section, `r x1` participants were excluded for either reporting that they had seen the study before and/or correctly reporting the hypothesis of the experiment.
 
-This left a total of `r length(unique(d$workerid))` participants.  As specified in my analysis plan, I ran all analyses on these `r length(unique(d$workerid))` participants (mean age = `r mean(d$age)` years; `r percent(Male)` male, `r percent(Female)` female), as well as only on participants who spent at least 5 seconds reading the priming (God vs. control) excerpt, which represented `r length(unique(d.time$workerid))` participants (mean age = `r mean(d.time$age)` years; `r percent(Male2)` male, `r percent(Female2)` female).
+This left a total of `r length(unique(d$workerid))` participants.  As specified in my analysis plan, I ran all analyses on these `r length(unique(d$workerid))` participants (mean age = `r round(mean(d$age), digits=1)` years; `r percent(Male)` male, `r percent(Female)` female), as well as only on participants who spent at least 5 seconds reading the priming (God vs. control) excerpt, which represented `r length(unique(d.time$workerid))` participants (mean age = `r round(mean(d.time$age), digits=1)` years; `r percent(Male2)` male, `r percent(Female2)` female).
 
 ### Confirmatory Analysis
 ####Preliminary Analysis: Linear Mixed Models
@@ -269,7 +273,7 @@ ms_LMEM_AllParticipants <- d.gathered %>%
 ggplot(ms_LMEM_AllParticipants, aes(x = condition, y=mean.risk, fill=condition)) +
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin = mean.risk-sem, 
-                     ymax = mean.risk+sem)) +
+                     ymax = mean.risk+sem), width=.2) +
   facet_wrap(~scenario) +
   theme_bw() +
   ylim(0,7) 
@@ -318,7 +322,7 @@ ms_LMEM_TimeExclusion <- d.gathered.time %>%
 ggplot(ms_LMEM_TimeExclusion, aes(x = condition, y=mean.risk, fill=condition)) +
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin = mean.risk-sem, 
-                     ymax = mean.risk+sem)) +
+                     ymax = mean.risk+sem), width=.2) +
   facet_wrap(~scenario) +
   theme_bw() +
   ylim(0,7)
@@ -423,7 +427,7 @@ ms_MainMediation_AllParticipants <- d %>%
 ggplot(ms_MainMediation_AllParticipants, aes(x = condition, y=mean.risk, fill=condition)) +
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin = mean.risk-sem.risk, 
-                     ymax = mean.risk+sem.risk)) +
+                     ymax = mean.risk+sem.risk), width = .3) +
   theme_bw() +
   ylim(0,7) + 
   ggtitle("Willigness to Take Risks by Condition")
@@ -432,7 +436,7 @@ ggplot(ms_MainMediation_AllParticipants, aes(x = condition, y=mean.risk, fill=co
 ggplot(ms_MainMediation_AllParticipants, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
-                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
+                     ymax = mean.perceivedrisk+sem.perceivedrisk), width = .3) +
   theme_bw() +
   ylim(0,7) + 
   ggtitle("Perceived Risk by Condition")
@@ -447,8 +451,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d$condition), mediator = d$perceivedriskindex, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d$condition), mediator = d$perceivedriskindex, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 **Participants who spent at least 5 seconds reading the prime**
@@ -476,7 +479,7 @@ ms_MainMediation_TimeExclusion <- d.time %>%
 ggplot(ms_MainMediation_TimeExclusion, aes(x = condition, y=mean.risk, fill=condition)) +
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin = mean.risk-sem.risk, 
-                     ymax = mean.risk+sem.risk)) +
+                     ymax = mean.risk+sem.risk), width=.3) +
   theme_bw() +
   ylim(0,7) + 
   ggtitle("Willigness to Take Risks by Condition")
@@ -485,7 +488,7 @@ ggplot(ms_MainMediation_TimeExclusion, aes(x = condition, y=mean.risk, fill=cond
 ggplot(ms_MainMediation_TimeExclusion, aes(x = condition, y=mean.perceivedrisk, fill=condition)) +
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin = mean.perceivedrisk-sem.perceivedrisk, 
-                     ymax = mean.perceivedrisk+sem.perceivedrisk)) +
+                     ymax = mean.perceivedrisk+sem.perceivedrisk), width=.3) +
   theme_bw() +
   ylim(0,7) + 
   ggtitle("Perceived Risk by Condition")
@@ -499,8 +502,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d.time$condition), mediator = d.time$perceivedriskindex, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d.time$condition), mediator = d.time$perceivedriskindex, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 
@@ -515,8 +517,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d$condition), mediator = d$m_perceivedrisk, dv = d$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d$condition), mediator = d$m_perceivedrisk, dv = d$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 **Scenario 2: Wilderness Camping**
@@ -528,8 +529,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d$condition), mediator = d$wc_perceivedrisk, dv = d$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d$condition), mediator = d$wc_perceivedrisk, dv = d$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 **Scenario 3: Skiing**
@@ -541,8 +541,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d$condition), mediator = d$s_perceivedrisk, dv = d$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d$condition), mediator = d$s_perceivedrisk, dv = d$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 **Participants who spent at least 5 seconds reading the prime**
@@ -555,8 +554,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d.time$condition), mediator = d.time$m_perceivedrisk, dv = d.time$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d.time$condition), mediator = d.time$m_perceivedrisk, dv = d.time$m_risk, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 **Scenario 2: Wilderness Camping**
@@ -568,8 +566,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d.time$condition), mediator = d.time$wc_perceivedrisk, dv = d.time$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d.time$condition), mediator = d.time$wc_perceivedrisk, dv = d.time$wc_risk, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 **Scenario 3: Skiing**
@@ -581,8 +578,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d.time$condition), mediator = d.time$s_perceivedrisk, dv = d.time$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d.time$condition), mediator = d.time$s_perceivedrisk, dv = d.time$s_risk, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 
@@ -597,8 +593,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d$condition), mediator = d$likelihood_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d$condition), mediator = d$likelihood_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 
 <br>**Perceived Risk Item: Seriousness**
@@ -610,8 +605,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d$condition), mediator = d$seriousness_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d$condition), mediator = d$seriousness_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 
 <br>**Perceived Risk Item: Coping**
@@ -623,8 +617,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d$condition), mediator = d$cope_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d$condition), mediator = d$cope_pr, dv = d$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 **Participants who spent at least 5 seconds reading the prime**
@@ -637,8 +630,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d.time$condition), mediator = d.time$likelihood_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d.time$condition), mediator = d.time$likelihood_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 
 <br>**Perceived Risk Item: Seriousness**
@@ -650,8 +642,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d.time$condition), mediator = d.time$seriousness_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d.time$condition), mediator = d.time$seriousness_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 
 <br>**Perceived Risk Item: Coping**
@@ -663,8 +654,7 @@ kable(sobel_chart$Models)
 kable(sobel_chart$Vals)
 
 #Bootstrapping
-#Sample size currently too small:
-#mediation(x = as.numeric(d.time$condition), mediator = d.time$cope_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
+mediation(x = as.numeric(d.time$condition), mediator = d.time$cope_pr, dv = d.time$riskindex, conf.level=.95, bootstrap=TRUE, B=5000)
 ```
 <br>
 
@@ -685,14 +675,10 @@ model7 = lm(riskindex ~ condition*belief_god, d)
 anova(model5, model6, model7)           
 
 #Effect of Condition for Non-believers
-#summary(lm(riskindex ~ condition, d[d$belief_god=="No",]))
-d.extra = d[d$belief_god=="No",]
-cohen.d(c(0,1), as.numeric(d.extra$condition))
+summary(lm(riskindex ~ condition, d[d$belief_god=="No",]))
 
 #Effect of Condition for Believers
 summary(lm(riskindex ~ condition, d[d$belief_god=="Yes",]))
-d.extra2 = d[d$belief_god=="Yes",]
-cohen.d(c(0,1), as.numeric(d.extra2$condition))
 ```
 
 <br>**Participants who spent at least 5 seconds reading the prime**
@@ -711,13 +697,141 @@ model10 = lm(riskindex ~ condition*belief_god, d.time)
 anova(model8, model9, model10)           
 
 #Effect of Condition for Non-believers
-#summary(lm(riskindex ~ condition, d.time[d.time$belief_god=="No",]))
-d.extra3 = d.time[d.time$belief_god=="No",]
-cohen.d(c(0,1), as.numeric(d.extra3$condition))
+summary(lm(riskindex ~ condition, d.time[d.time$belief_god=="No",]))
 
 #Effect of Condition for Believers
-#summary(lm(riskindex ~ condition, d.time[d.time$belief_god=="Yes",]))
-d.extra4 = d.time[d.time$belief_god=="Yes",]
-cohen.d(c(0,1), as.numeric(d.extra4$condition))
+summary(lm(riskindex ~ condition, d.time[d.time$belief_god=="Yes",]))
 ```
 
+### Exploratory Analyses
+#### Time Reading Prime as Covariate
+```{r Exploratory_PrimeasCovariate, message=FALSE, warning=FALSE}
+model21 = lm(riskindex ~ condition, d)
+summary(model21)
+model22 = lm(riskindex ~ condition + timer, d)
+summary(model22)
+anova(model21, model22)
+```
+
+#### Scenario as a Random Effect
+**All participants**
+```{r Exploratory_ScenarioRandomEffect, message=FALSE, warning=FALSE}
+#Does including scenario as a random effect improve the model fit?
+model11 = lm(risk ~ condition, d.gathered)
+summary(model11)
+model12 = lmer(risk ~ condition + (1 | scenario), REML = FALSE, d.gathered)
+summary(model12)
+anova(model12, model11)
+
+#Does allowing the effect of condition to vary by scenario improve the model fit?
+model13 = lmer(risk ~ condition + (1 | scenario), REML = TRUE, d.gathered)
+model14 = lmer(risk ~ condition + (1 + condition | scenario), REML = TRUE, d.gathered)
+summary(model14)
+anova(model13, model14, refit=FALSE)
+
+#Does including participant ID as a random effect improve the model fit?
+model15 = lmer(risk ~ condition + (1 | workerid) + (1 | scenario), REML = TRUE, d.gathered)
+summary(model15)
+anova(model13, model15, refit=FALSE)
+```
+
+<br>**Participants who spent at least 5 seconds reading the prime**
+```{r Exploratory_ScenarioRandomEffect2, message=FALSE, warning=FALSE}
+#Does including scenario as a random effect improve the model fit?
+model16 = lm(risk ~ condition, d.gathered.time)
+summary(model16)
+model17 = lmer(risk ~ condition + (1 | scenario), REML = FALSE, d.gathered.time)
+summary(model17)
+anova(model17, model16)
+
+#Does allowing the effect of condition to vary by scenario improve the model fit?
+model18 = lmer(risk ~ condition + (1 | scenario), REML = TRUE, d.gathered.time)
+model19 = lmer(risk ~ condition + (1 + condition | scenario), REML = TRUE, d.gathered.time)
+summary(model19)
+anova(model18, model19, refit=FALSE)
+
+#Does including participant ID as a random effect improve the model fit?
+model20 = lmer(risk ~ condition + (1 | workerid) + (1 | scenario), REML = TRUE, d.gathered.time)
+summary(model20)
+anova(model18, model20, refit=FALSE)
+```
+
+
+## Discussion
+### Summary of Replication Attempt
+I was able to partially replicate the original study's key result, a mediation analysis with willingness to take risks (α = `r round(alpha2, digits=2)`) as the dependent variable, priming condition (God = 1, control = 0) as the independent variable, and perceived risk (α = `r round(alpha1, digits=2)`) as the mediating variable.  Unlike the original study, participants in the God condition did not report a significantly higher willingness to take risks, *b* = 0.27, *t*(152) = 1.25, *p* = .212, than participants in the control condition.  Further, participants in the God condition did not perceive significantly less danger associated with these risks, *b* = -0.20, *t*(152) = -1.46, *p* = .147, than participants in the control condition.  When the effects of God condition and perceived danger were both included in the model, the indirect effect (i.e., through the mediator) was not significant, (95% confidence interval, or CI = [-0.06, 0.44]), unlike the original study.  The direct effect (i.e., the effect of condition independent of the mediator) remained non-significant, *b* = 0.09, *t*(151) = 0.51, *p* = .610.  Therefore, although I did not find a significant indirect effect (or main effect) as in the original study, I conclude that my results represent a partial replication, as all the effects are at least in the expected direction.  It is likely that the effect size from the original study was an overestimation of the actual effect size, and thus, even with 80% power, my replication was underpowered.
+
+**Key result from original study:** <br>
+![alt text](http://www.stanford.edu/~kflasche/proj/MediationModel_image.png)
+
+**Result from replication:** <br>
+![alt text](http://web.stanford.edu/~kflasche/proj/MediationModel_image_replication.png)
+
+Further, although the original authors did not exclude any participants on the basis of time spent reading the priming excerpt, I also ran all my analyses on participants who spent at least 5 seconds reading the priming information (as I would not expect the priming manipulation to have an effect on participants who did not read it).  The results of the replication mediation analysis reported above were the same for participants who spent at least 5 seconds reading the priming excerpt.  Specifically, participants in the God condition did not report a significantly higher willingness to take risks, *b* = 0.24, *t*(143) = 1.11, *p* = .269, than participants in the control condition.  Further, participants in the God condition did not perceive significantly less danger associated with these risks, *b* = -0.19, *t*(143) = -1.33, *p* = .186, than participants in the control condition.  When the effects of God condition and perceived danger were both included in the model, the indirect effect (i.e., through the mediator) was not significant, (95% confidence interval, or CI = [-0.07, 0.42]), unlike the original study.  The direct effect (i.e., the effect of condition independent of the mediator) remained non-significant, *b* = 0.08, *t*(142) = 0.44, *p* = .659.
+
+### Commentary
+#### Insights from Additional Confirmatory Analyses
+<u>**Preliminary Analysis: Linear Mixed Models**</u><br>
+The original study found that the results of a linear mixed model that included scenario (three levels, dummy coded), condition, and the terms representing their interaction did not differ from the results of the model without the interaction, *χ2*(2, *N* = 101) = 1.24, *p* = .539, which indicates that scenario did not moderate the effect of condition on willingness to take risks.
+
+This result was replicated, both for all participants, *χ2*(2, *N* = 154) = 1.57, *p* = .456, and for participants who spent at least 5 seconds reading the priming excerpt, *χ2*(2, *N* = 145) = 3.18, *p* = .204.
+
+<u>**Additional Analysis: Mediation for each scenario**</u><br>
+Although the authors collapsed the perceived risk items and risk taking items across the three risky scenarios (motorcycling without a helmet, wilderness camping, and backcountry skiing) for their main mediation analysis, they showed in their Supplemental Material that the indirect effect (i.e., the effect of condition on willingness to take risks, through perceived risk) remained significant when running the mediation analysis for each scenario individually.
+
+I also found that the indirect effect from my main mediation analysis (although non-significant in my replication) did not vary by scenario.  Further, this was true both for all participants and for participants who spent at least 5 seconds reading the priming excerpt:
+<br>**Scenario 1: Motorcycle**
+<br>**All participants**<br>
+95% CI =  [-0.04, 0.37]
+<br>**Participants who spent at least 5 seconds reading the prime**<br>
+95% CI =  [-0.06, 0.37]
+
+**Scenario 2: Wilderness Camping**
+<br>**All participants**<br>
+95% CI =  [-0.03, 0.43]
+<br>**Participants who spent at least 5 seconds reading the prime**<br>
+95% CI =  [-0.03, 0.49]
+
+**Scenario 3: Skiing**
+<br>**All participants**<br>
+95% CI =  [-0.05, 0.72]
+<br>**Participants who spent at least 5 seconds reading the prime**<br>
+95% CI =  [-0.09, 0.69]
+
+<u>**Additional Analysis: Mediation for each perceived risk item**</u><br>
+Additionally, as the authors included in their Supplemental Material, they ran their main mediation analysis three additional times, treating each item in the perceived risk index individually as the mediating variable.  The authors found that there were no significant differences between the indirect effects.  Specifically, while the perceived risk index significantly mediated the effect of condition on willingness to take risks, none of the perceived risk items alone (likelihood, seriousness, and coping) significantly mediated the effect of condition on willingness to take risks (see "Analysis Plan" section for additional information).
+
+As in my main mediation analysis, in which the perceived risk index is the mediating variable, I did not find a significant indirect effect when treating each item in the perceived risk index individually as the mediating variable.  This was true both for all participants and for participants who spent at least 5 seconds reading the priming excerpt.  The one exception was that there was a significant indirect effect through the perceived risk item of "coping", although this was significant only for the mediation analysis run on all participants (see below for additional details):
+<br>**Perceived Risk Item: Likelihood**
+<br>**All participants**<br>
+95% CI =  [-0.01, 0.18]
+<br>**Participants who spent at least 5 seconds reading the prime**<br>
+95% CI =  [-0.01, 0.19]
+
+**Perceived Risk Item: Seriousness**
+<br>**All participants**<br>
+95% CI =  [-0.01, 0.27]
+<br>**Participants who spent at least 5 seconds reading the prime**<br>
+95% CI =  [-0.01, 0.27]
+
+**Perceived Risk Item: Coping**
+<br>**All participants**<br>
+95% CI =  [0.02, 0.47] <br>
+Note here that while participants in the God condition did not report a significantly higher willingness to take risks, *b* = 0.27, *t*(152) = 1.25, *p* = .212, participants in the God condition *did* report a greater ability to cope with these risks (ability to cope is reverse coded here), *b* = -0.47, *t*(152) = -2.20, *p* = .029, than participants in the control condition.  When the effects of God condition and perceived coping ability were both included in the model, the indirect effect was significant and the direct effect remained non-significant, *b* = 0.04, *t*(151) = 0.19, *p* = .852.
+<br>**Participants who spent at least 5 seconds reading the prime**<br>
+95% CI =  [-0.01, 0.41]
+
+<u>**Additional Analysis: Is there Moderation by God Belief?**</u><br>
+Finally, as the authors depicted in their Supplemental Material, they did not find that belief in God moderated the effect of condition on willingness to take risks (see "Analysis Plan" section for additional information).  Similarly, I did not find that belief in God moderated the effect of condition on willingness to take risks, neither for all participants (believers: *t*(77) = 0.58, *p* = .563; non-believers: *t*(73) = 1.08, *p* = .285), nor for participants who spent at least 5 seconds reading the priming excerpt (believers: *t*(75) = 0.36, *p* = .718; non-believers: *t*(66) = 1.12, *p* = .268).
+<br><br>
+
+#### Insights from Additional Exploratory Analyses
+**Time Reading Prime as a Covariate**<br>
+Including time spent reading the priming excerpt as a covariate did not improve the model fit in comparison to the model with only condition as a predictor of risk-taking, *F*(1, 151) = 1.91, *p* = .169.
+
+**Scenario as a Random Effect**<br>
+While the authors found that scenario did not moderate the effect of condition from a linear mixed model analysis, scenario was treated as a fixed effect, rather than as a random effect, in this analysis.  Thus, I wanted to see whether the effect of condition on willingness to take risks varied by scenario when treating scenario as a random effect.  While including scenario as a random effect significantly improved the model fit (in comparison to the model with only condition as a predictor of willingness to take risks), $X^2$(1, *N* = 154) = 85.89, *p* < .001, allowing the effect of condition to vary by scenario did not improve the model fit, $X^2$(2, *N* = 154) = 1.33, *p* = .514.  It is worth noting that, even in the best model (with both scenario and participant ID as random effects), there was no significant effect of condition on willingness to take risks, *b* = 0.27, *t*(152.00) = 1.25, *p* = .212.  The same results were found for participants who spent at least 5 seconds reading the priming excerpt. 
+<br><br>
+
+#### Assessment of the Meaning of the Replication
+Due to the fact that the original study was run on MTurk and that I used all the exact materials from the original study in my replication, I do not think that my failure to fully replicate the original study's key result was due to the few differences between the original study and my replication.  The "Differences from Original Study" section outlines that the changes I did make were either minor and/or in the service of best research practices (in order to make replicating the original study's findings as likely as possible).  Given that all the effects in the replication of the key mediation analysis were in the expected direction, I think it is most likely that the effect size from the original study was an overestimation of the actual effect size, and thus, even with 80% power, my replication was underpowered.
